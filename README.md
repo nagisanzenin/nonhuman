@@ -1,87 +1,84 @@
 # nonhuman
 
-**Agent-first coding mode. −30% billed tokens on Claude Opus across Python, TypeScript, Rust and C, with the same hidden-test and security results as no skill.**
+Agent-first coding mode. One 500-token skill for any coding agent.
 
-One 500-token skill. Works with any agent that reads `SKILL.md`, `AGENTS.md` or rule files.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
+  <img alt="-30% billed cost, 12.2 to 7.4 model calls per run, 513/516 security tests (same as no skill)" src="assets/hero-light.svg">
+</picture>
 
 ## Philosophy
 
-Code written by agents is increasingly read only by agents. Comments, docstrings, padding, narration and extra round-trips serve human readers and cost every agent that follows. `nonhuman` optimises for the next agent instead: fewest billed tokens per correct, secure result. Readability is optional. Validation, authorisation, escaping, bounds checks and error handling are never optional.
+Code written by agents is increasingly read only by agents. Comments, padding, narration and extra round-trips serve a human reader who is not there, and every following agent pays for them. Optimise for the next agent: **fewest billed tokens per correct, secure result.** Readability is optional. Validation, authorisation, escaping, bounds checks and error handling are not.
+
+## Math
+
+An agent run is N model calls. Each call re-reads the fixed prefix P and everything appended so far (Δᵢ = tool results + own output), then emits visible output oᵢ and thinking hᵢ. With prices relative to base input (cache write 1.25, cache read 0.1, output 5):
+
+```
+C = P·(1.25u + 0.1N)  +  Σᵢ Δᵢ·(1.25 + 0.1(N − i))  +  5·Σᵢ (oᵢ + hᵢ)          E[C_task] = C / p_success
+    prefix re-reads       context growth                 output + thinking
+```
+
+The decomposition is accounting, not a fit: on 84 runs (830 billed calls) it matches every bill to within 0.02%. Fitted across the 36 Opus runs:
+
+| quantity | value (Opus) |
+|---|---|
+| one extra call | ≈ 13.8k units, 5.9% of a run · corr(N, C) = 0.88 |
+| one output token | ≈ 6.6 units: billed ×5, then re-read every later call |
+| cost split | prefix 39% · context growth 28% · output 27% · thinking 6% |
+| ceiling of "write terser code" | < 10% of the bill |
+
+**N is the lever.** Terse code helps; fewer calls helps more.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cost-anatomy-dark.svg">
+  <img alt="Per-run cost split for no skill, Ponytail and nonhuman" src="assets/cost-anatomy-light.svg">
+</picture>
+
+## Rules (the whole skill)
+
+1. **Fewer calls.** Batch independent tool calls; read targeted ranges once; one edit per file; verify once.
+2. **Less output.** Minimal diffs; no comments, docstrings, narration or recap; reuse before writing; at most one compact test per task.
+3. **Small tool output.** `-q`, `| tail`, grep for failures.
+4. **Never cut** validation, auth, escaping, path-traversal guards, bounds/overflow checks, data-loss error handling.
+
+Full text: [`skills/nonhuman/SKILL.md`](skills/nonhuman/SKILL.md).
+
+## Benchmark
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cost-by-language-dark.svg">
+  <img alt="Billed cost relative to no skill by language" src="assets/cost-by-language-light.svg">
+</picture>
+
+| hidden tests passed (Opus, 36 runs) | no skill | Ponytail | nonhuman |
+|---|---|---|---|
+| functional | 499/510 | 498/510 | 498/510 |
+| security | 513/516 | 513/516 | 513/516 |
+
+- **Fixtures:** Python service, TypeScript service, Rust crate, C library; 23 feature tasks. Hidden functional and security tests (SQL injection, path traversal, authz, overflow, XSS, leaks under ASan). Specs never mention security. Reference solutions pass 100%; mutants are caught.
+- **Arms:** no skill · [Ponytail](https://github.com/DietrichGebert/ponytail) (strongest public alternative) · nonhuman. 3 runs per cell, Claude Opus.
+- **Cost:** per-call billed usage from transcripts (input, cache write, cache read, output, thinking). No estimates.
+- **The one functional gap:** a spec-ambiguous TypeScript check (empty code → 400 or 404) that one no-skill run passed and every other run failed.
+
+Reproduce: `bench/prep.py` → run your agent on `PROMPT.md` → `bench/score.py` → `bench/billed.py` → `scripts/summarize.py`, `scripts/charts.py`. Raw data in [`results/`](results/).
 
 ## Install
 
-| Platform | Install |
+| Platform | |
 |---|---|
 | Claude Code | `claude plugin marketplace add nagisanzenin/nonhuman` → `claude plugin install nonhuman@nonhuman` |
-| OpenAI Codex | `codex plugin marketplace add nagisanzenin/nonhuman` → `codex plugin add nonhuman@nonhuman` |
+| Codex | `codex plugin marketplace add nagisanzenin/nonhuman` → `codex plugin add nonhuman@nonhuman` |
 | Gemini CLI | `gemini extensions install https://github.com/nagisanzenin/nonhuman` |
 | Antigravity | `agy plugin install https://github.com/nagisanzenin/nonhuman` |
-| Cursor | copy `rules/cursor/nonhuman.mdc` → `.cursor/rules/` |
-| Windsurf | copy `rules/windsurf/nonhuman.md` → `.windsurf/rules/` |
-| Cline | copy `rules/cline/nonhuman.md` → `.clinerules/` |
-| GitHub Copilot | copy `rules/copilot/copilot-instructions.md` → `.github/` |
-| Kiro | copy `rules/kiro/nonhuman.md` → `.kiro/steering/` |
-| OpenCode, Amp, Goose, Jules, anything reading `AGENTS.md` | append `rules/AGENTS.md` to your `AGENTS.md` |
-| Any `SKILL.md` platform | point it at `skills/` |
+| Cursor · Windsurf · Cline · Copilot · Kiro | copy the file from [`rules/`](rules/) into the platform's rules folder |
+| AGENTS.md agents (OpenCode, Amp, Goose, Jules) | append [`rules/AGENTS.md`](rules/AGENTS.md) |
 
-One source of truth: `skills/nonhuman/SKILL.md`. `python3 scripts/build_rules.py` regenerates `rules/`.
-
-Status: the skill text is what the benchmark measured. The install routes follow each platform's documented format and are **not yet verified live**; please open an issue with what you see.
-
-## Results (Claude Opus, 36 runs, 207 task attempts)
-
-Billed cost per run, in base-input-token units:
-
-| | baseline | Ponytail | **nonhuman** |
-|---|---|---|---|
-| Python | 353k | 346k (0.98×) | **201k (0.57×)** |
-| TypeScript | 183k | 194k (1.06×) | **177k (0.97×)** |
-| Rust | 267k | 243k (0.91×) | **185k (0.69×)** |
-| C | 237k | 257k (1.08×) | **169k (0.71×)** |
-| **All** | 260k | 260k (1.00×) | **183k (0.70×)** |
-
-| per run | baseline | Ponytail | nonhuman |
-|---|---|---|---|
-| model calls | 12.2 | 13.2 | **7.4** |
-| output tokens | 17,461 | 16,421 | **12,356** |
-| thinking tokens | 2,701 | 2,459 | 3,202 |
-| functional tests passed | 499/510 | 498/510 | 498/510 |
-| security tests passed | 513/516 | 513/516 | 513/516 |
-
-The one functional difference is a TypeScript check that is ambiguous in the spec (empty discount code: 400 or 404). One baseline run passed it; every other run of every arm failed it.
-
-## The math
-
-Every call re-reads the whole context. For a run of N calls with fixed prefix P, appended context Δᵢ (tool results + own output), visible output oᵢ and thinking hᵢ:
-
-```
-C = P·(1.25u + 0.1N) + Σᵢ Δᵢ·(1.25 + 0.1(N−i)) + 5·Σᵢ(oᵢ + hᵢ)        E[C_task] = C / p_success
-```
-
-(u = uncached share of P; weights = Anthropic prices relative to base input.) Fitted on 437 calls, it reproduces every run's bill to within 28 units of ~170k.
-
-| what it means | measured |
-|---|---|
-| one extra model call | ≈ 12.5k units, ~7% of a run (corr(N, cost) = 0.81) |
-| one output token | ≈ 6.6 units (billed 5×, then re-read as context) |
-| cost split | prefix 34% · context growth 31% · visible output 27% · thinking 8% |
-| code terseness alone | capped below 10% of total |
-
-So the skill's first rule is **fewer calls**: batch independent tool calls, read targeted ranges once, edit each file once, verify once. Then less output. Details: [`results/MODEL.md`](results/MODEL.md).
-
-## Method
-
-- 4 fixtures (Python service, TypeScript service, Rust crate, C library), 23 feature tasks. Each task has hidden **functional** and **security** tests; specs never mention security; the codebases contain the guard helpers a careful engineer should reuse. Reference solutions pass 100%; mutation checks confirm the security tests catch real flaws.
-- Arms: no skill, [Ponytail](https://github.com/DietrichGebert/ponytail) (MIT, strongest public alternative), nonhuman. Same prompt otherwise.
-- Cost: per-call `usage` (input, cache write, cache read, output, thinking) from agent transcripts, not estimates.
-- Reproduce: `python3 bench/prep.py <py|ts|rs|c> <arm> <run>` → run your agent on the generated `PROMPT.md` → `python3 bench/score.py <lang>` → `python3 bench/billed.py <transcripts_dir>` → `python3 scripts/summarize.py`. Needs `tiktoken`, `pytest`, Node ≥ 22, Rust, clang.
+Install routes follow each platform's documented format; not all are verified live yet.
 
 ## Limits
 
-- One harness (Claude Code subagents), Opus for v1.0 (an earlier Sonnet run of v0.1 is in `results/quality_*_sonnet_v1.json`), 3 runs per cell, small purpose-built fixtures.
-- Prompts held several tasks; batching across tasks helps. Single-task sessions will save less (TypeScript, already lean at 7 calls, saved 3%).
-- Thinking budget was left at the harness default.
+One harness (Claude Code subagents), one model per study, 3 runs per cell, purpose-built fixtures. Prompts held several tasks, so batching across tasks helped; single-task sessions save less (TypeScript, already at ~7 calls, saved 3%). Thinking budget at harness default.
 
-## License
-
-MIT. Benchmark includes Ponytail's `SKILL.md` under its MIT license (`bench/arms/`).
+MIT.
