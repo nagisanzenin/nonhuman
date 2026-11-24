@@ -1,10 +1,10 @@
 # nonhuman
 
-Agent-first coding mode. One 600-token skill for any coding agent.
+Agent-first coding mode. One 700-token skill for any coding agent.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
-  <img alt="-30% billed cost, 12.2 to 7.4 model calls per run, 513/516 security tests (same as no skill)" src="assets/hero-light.svg">
+  <img alt="-20% billed cost on 16 held-out SWE-Bench Pro tasks, 16/16 resolved (same as no skill), 13.7 to 11.2 model calls per run" src="assets/hero-light.svg">
 </picture>
 
 ## Philosophy
@@ -20,7 +20,7 @@ C = P·(1.25u + 0.1N)  +  Σᵢ Δᵢ·(1.25 + 0.1(N − i))  +  5·Σᵢ (oᵢ 
     prefix re-reads       context growth                 output + thinking
 ```
 
-The decomposition is accounting, not a fit: on 84 runs (830 billed calls) it matches every bill to within 0.02%. Fitted across the 36 Opus runs:
+The decomposition is accounting, not a fit: on 84 runs (830 billed calls) it matches every bill to within 0.02%. Measured on the 36-run Opus fixture study:
 
 | quantity | value (Opus) |
 |---|---|
@@ -38,32 +38,45 @@ The decomposition is accounting, not a fit: on 84 runs (830 billed calls) it mat
 
 ## Rules (the whole skill)
 
-1. **Fewer calls.** Batch independent tool calls; read targeted ranges once; one edit per file; verify once.
-2. **Less output.** Minimal diffs; no narration, recap or comments; reuse before writing; at most one compact test per task.
-3. **Keep what the next agent needs.** Typed signatures (codebase convention); a one-line comment only for a non-obvious invariant or security reason.
+1. **Fewer calls.** Batch independent tool calls; read targeted ranges once; one edit per file; verify once; check every requirement against the diff before replying.
+2. **Cut ephemeral output, never the contract.** No narration, recap or re-printed code; minimal diffs; reuse before writing. Keep the spec's exact names and cover every case each requirement names: the smallest diff never means the smallest behaviour.
+3. **Keep what the next agent needs.** Typed signatures (codebase convention); a one-line comment only for a non-obvious invariant or security reason; at most one compact test.
 4. **Small tool output.** `-q`, `| tail`, grep for failures; never cut off the failing line.
 5. **Never cut** validation, auth, escaping, path-traversal guards, bounds/overflow checks, data-loss error handling.
 
-Full text: [`skills/nonhuman/SKILL.md`](skills/nonhuman/SKILL.md).
+Full text: [`skills/nonhuman/SKILL.md`](skills/nonhuman/SKILL.md). Each rule's possible failure and its guard: [`FAILURE_MODES.md`](FAILURE_MODES.md).
 
 ## Benchmark
 
+### Real repositories (primary, pre-registered)
+
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/cost-by-language-dark.svg">
-  <img alt="Billed cost relative to no skill by language" src="assets/cost-by-language-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cost-by-task-dark.svg">
+  <img alt="Billed cost per held-out task relative to no skill" src="assets/cost-by-task-light.svg">
 </picture>
 
-| hidden tests passed (Opus, 36 runs) | no skill | Ponytail | nonhuman |
+| 16 held-out tasks, Opus, n=1 per arm | no skill | Ponytail | nonhuman v1.2 |
 |---|---|---|---|
-| functional | 499/510 | 498/510 | 498/510 |
-| security | 513/516 | 513/516 | 513/516 |
+| billed cost (95% CI over tasks) | 1.00× | 0.98× (0.90–1.07) | **0.80× (0.74–0.87)** |
+| model calls per run | 13.7 | 14.8 | **11.2** |
+| resolved (hidden FAIL_TO_PASS + PASS_TO_PASS) | 16/16 | 16/16 | **16/16** |
 
-- **Fixtures:** Python service, TypeScript service, Rust crate, C library; 23 feature tasks. Hidden functional and security tests (SQL injection, path traversal, authz, overflow, XSS, leaks under ASan). Specs never mention security. Reference solutions pass 100%; mutants are caught.
-- **Arms:** no skill · [Ponytail](https://github.com/DietrichGebert/ponytail) (strongest public alternative) · nonhuman. 3 runs per cell, Claude Opus.
-- **Cost:** per-call billed usage from transcripts (input, cache write, cache read, output, thinking). No estimates.
-- **The one functional gap:** a spec-ambiguous TypeScript check (empty code → 400 or 404) that one no-skill run passed and every other run failed.
+- **Tasks:** every Python instance of the [SWE-Bench Pro](https://arxiv.org/abs/2509.16941) public `hard` split not used during development (ansible ×6, openlibrary ×6, qutebrowser ×4), each a real multi-file issue.
+- **Protocol:** criteria, task list and skill hash were [pre-registered](results/real/PREREG.md) before the first run: cost ≤ 0.95×, at most 2 more lost than won discordant pairs. Both passed (0 discordant pairs).
+- **Harness:** one task per session, each run in its own no-network container built from the official instance image, with hidden tests removed. Grading uses the official evaluator, the gold patch as a control on every task, and [three documented fixes](bench/real/EVALUATOR_PATCH.md) (including a race in its local-Docker mode). Code and raw data: [`bench/real/`](bench/real/), [`results/real/`](results/real/). Reproduce: clone `scaleapi/SWE-bench_Pro-os` into `data/pro-os`, apply the evaluator changes, then `bench/real/prep.py TASK ARM RUN` → run your agent on `PROMPT.md` → `bench/real/grade.py TASK` → `bench/real/billed.py`.
+- **How v1.2 came about:** a 4-task pilot of v1.1 cost 0.84× but lost 2 runs that no skill won. Both losses traced to terseness leaking into the contract: a renamed identifier and an incomplete cleanup. v1.2 adds one principle against that whole class, not a patch per task, and was then tested only on tasks it had never seen.
 
-Reproduce: `bench/prep.py` → run your agent on `PROMPT.md` → `bench/score.py` → `bench/billed.py` → `scripts/summarize.py`, `scripts/charts.py`. Raw data in [`results/`](results/).
+### Controlled fixtures (secondary)
+
+Four purpose-built services (Python, TypeScript, Rust, C) with hidden functional and **security** tests (SQL injection, path traversal, authz, overflow, XSS, ASan leaks). Specs never mention security. 3 runs per cell, several tasks per prompt.
+
+| | no skill | Ponytail | nonhuman v1.0 | nonhuman v1.2 |
+|---|---|---|---|---|
+| billed cost | 1.00× | 1.00× | 0.71× | 0.86× (≈0.78× with call 1 cache-normalised) |
+| security tests | 513/516 | 513/516 | 513/516 | 513/516 |
+| functional tests | 499/510 | 498/510 | 498/510 | 498/510 |
+
+v1.2 trades part of v1.0's fixture saving for the requirement check that closed the real-repo losses. All v1.2 runs started with a cold prompt cache (≈+20k units each), which is a harness artifact.
 
 ## Install
 
@@ -80,6 +93,9 @@ Install routes follow each platform's documented format; not all are verified li
 
 ## Limits
 
-One harness (Claude Code subagents), one model per study, 3 runs per cell, purpose-built fixtures. Prompts held several tasks, so batching across tasks helped; single-task sessions save less (TypeScript, already at ~7 calls, saved 3%). Thinking budget at harness default. Numbers are for v1.0; v1.1 only adds durable context (typed signatures, invariant comments), bounded at under 1% of session cost and not re-benchmarked; in the v1.0 runs the model already kept types on 107/107 new Python functions.
+- One model (Opus) and one harness (Claude Code subagents).
+- Real-repo tasks are Python only: Go and JS repos hung or ran out of memory under x86 emulation on the test machine, so they are not measured.
+- n=1 per arm per task. Equal resolve rates show no large regression, not parity at the level of a few points.
+- Thinking budget was left at the harness default.
 
 MIT.

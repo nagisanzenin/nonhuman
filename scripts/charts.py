@@ -1,5 +1,5 @@
 """Render README charts (light + dark SVG) from results/. usage: python3 scripts/charts.py -> assets/*.svg
-Numbers come from results/billed_runs.csv, results/billed_calls.csv and results/quality_*_opus.json (Opus = run >= 11).
+Numbers come from results/real/ (pre-registered held-out SWE-Bench Pro run, nonhuman v1.2).
 Palette: validated categorical slots (blue, orange, aqua, yellow), light and dark steps."""
 import csv, json, os, statistics as st
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -15,20 +15,24 @@ FONT = "-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif"
 ARMS = ["baseline", "ponytail", "nonhuman"]
 NAME = {"baseline": "No skill", "ponytail": "Ponytail", "nonhuman": "nonhuman"}
 
-runs = [r for r in csv.DictReader(open(os.path.join(RES, "billed_runs.csv"))) if int(r["run"]) >= 11]
-mean = lambda X, k: st.mean(float(r[k]) for r in X)
-rel = {}
-for lang in ["all", "py", "rs", "c", "ts"]:
-    sel = lambda a: [r for r in runs if r["arm"] == a and lang in (r["lang"], "all")]
-    b = mean(sel("baseline"), "cost")
-    rel[lang] = {a: mean(sel(a), "cost") / b for a in ARMS}
-calls = {a: mean([r for r in runs if r["arm"] == a], "calls") for a in ARMS}
+REAL = os.path.join(RES, "real")
+TASKS = [f"h{i:02d}" for i in range(1, 17)]
+runs = {(r["task"], r["arm"]): r for r in csv.DictReader(open(os.path.join(REAL, "billed_runs.csv"))) if r["task"] in TASKS}
+grades = {}
+for l in open(os.path.join(REAL, "grades_heldout.jsonl")):
+    g = json.loads(l); grades[(g["task"], g["arm"])] = g
+VALID = [t for t in TASKS if grades[(t, "gold")]["resolved"]]
+tot = {a: sum(float(runs[(t, a)]["cost"]) for t in VALID) for a in ARMS}
+rel = {a: tot[a] / tot["baseline"] for a in ARMS}
+calls = {a: st.mean(float(runs[(t, a)]["calls"]) for t in VALID) for a in ARMS}
+resolved = {a: sum(grades[(t, a)]["resolved"] for t in VALID) for a in ARMS}
+per_task = {t: {a: float(runs[(t, a)]["cost"]) / float(runs[(t, "baseline")]["cost"]) for a in ARMS} for t in VALID}
 
 # per-run decomposition: prefix re-reads, context growth, visible output, thinking
-calls_rows = [c for c in csv.DictReader(open(os.path.join(RES, "billed_calls.csv"))) if int(c["run"]) >= 11]
 by = {}
-for c in calls_rows:
-    by.setdefault(c["agent"], []).append({k: (float(v) if k not in ("agent", "lang", "arm") else v) for k, v in c.items()})
+for c in csv.DictReader(open(os.path.join(REAL, "billed_calls.csv"))):
+    if c["task"] in VALID:
+        by.setdefault(c["agent"], []).append({k: (float(v) if k not in ("agent", "task", "arm") else v) for k, v in c.items()})
 parts = {a: {"prefix": [], "growth": [], "output": [], "thinking": []} for a in ARMS}
 for L in by.values():
     L.sort(key=lambda x: x["call"]); N, P = len(L), L[0]["ctx"]
@@ -39,11 +43,6 @@ for L in by.values():
     for k, v in d.items():
         parts[L[0]["arm"]][k].append(v)
 anat = {a: {k: st.mean(v) for k, v in parts[a].items()} for a in ARMS}
-
-sec = {a: [0, 0] for a in ARMS}
-for lang in ["py", "ts", "rs", "c"]:
-    for x in json.load(open(os.path.join(RES, f"quality_{lang}_opus.json"))):
-        sec[x["arm"]][0] += x["sec"][0]; sec[x["arm"]][1] += x["sec"][1]
 
 
 def bar(x0, y, w, h, color, r=4):
@@ -66,9 +65,9 @@ def svg(w, h, body, title):
 
 
 def hero(T):
-    tiles = [(f"−{(1-rel['all']['nonhuman'])*100:.0f}%", "billed cost vs no skill", "Opus · Python, TS, Rust, C"),
-             (f"{calls['baseline']:.1f} → {calls['nonhuman']:.1f}", "model calls per run", "the main lever"),
-             (f"{sec['nonhuman'][0]}/{sec['nonhuman'][1]}", "security tests passed", "same as no skill")]
+    tiles = [(f"−{(1-rel['nonhuman'])*100:.0f}%", "billed cost vs no skill", f"{len(VALID)} held-out SWE-Bench Pro tasks"),
+             (f"{resolved['nonhuman']}/{len(VALID)}", "tasks resolved", f"no skill: {resolved['baseline']}/{len(VALID)}"),
+             (f"{calls['baseline']:.1f} → {calls['nonhuman']:.1f}", "model calls per run", "the main lever")]
     w, h, gap = 720, 112, 12; tw = (w - 2 * gap) / 3; b = ""
     for i, (v, lab, sub) in enumerate(tiles):
         x = i * (tw + gap)
@@ -77,30 +76,29 @@ def hero(T):
     return svg(w, h, b, "nonhuman headline results")
 
 
-def by_language(T):
-    rows = [("All", "all"), ("Python", "py"), ("Rust", "rs"), ("C", "c"), ("TypeScript", "ts")]
-    w, left, right, top = 720, 96, 64, 64; bh, inner, band = 14, 4, 44
-    h = top + band * len(rows) + 36; xmax = 1.15; sx = (w - left - right) / xmax
-    b = text(0, 18, "Billed cost relative to no skill", T["t1"], 15, 600)
-    b += text(0, 38, "lower is better · mean of 3 runs per cell · 1.0× = no skill", T["t3"], 12)
+def by_task(T):
+    rows = sorted(VALID, key=lambda t: per_task[t]["nonhuman"])
+    w, left, right, top = 720, 64, 64, 64; bh, band = 12, 22
+    h = top + band * len(rows) + 36; xmax = 1.5; sx = (w - left - right) / xmax
+    b = text(0, 18, "Billed cost per task relative to no skill", T["t1"], 15, 600)
+    b += text(0, 38, f"held-out SWE-Bench Pro (hard, Python) · pre-registered · total nonhuman {rel['nonhuman']:.2f}× · Ponytail {rel['ponytail']:.2f}×", T["t3"], 12)
     lx = w - right - 190
     for i, (a, c) in enumerate([("nonhuman", T["s"][0]), ("ponytail", T["s"][1])]):
         b += f'<rect x="{lx + i*104}" y="10" width="10" height="10" rx="2" fill="{c}"/>' + text(lx + 16 + i*104, 19, NAME[a], T["t2"], 12)
-    for tick in [0, 0.25, 0.5, 0.75, 1.0]:
+    for tick in [0, 0.5, 1.0, 1.5]:
         x = left + tick * sx
-        b += f'<line x1="{x:.1f}" y1="{top-6}" x2="{x:.1f}" y2="{top + band*len(rows) - 8}" stroke="{T["grid"]}" stroke-width="1"/>'
-        b += text(x, top + band * len(rows) + 10, f"{tick:.2g}×" if tick else "0", T["t3"], 11, anchor="middle")
-    x1 = left + 1.0 * sx
-    b += f'<line x1="{x1:.1f}" y1="{top-10}" x2="{x1:.1f}" y2="{top + band*len(rows) - 4}" stroke="{T["t3"]}" stroke-width="1.5"/>'
-    b += text(x1 + 4, top + band * len(rows) + 26, "no skill", T["t3"], 11)
-    for i, (lab, k) in enumerate(rows):
+        b += f'<line x1="{x:.1f}" y1="{top-6}" x2="{x:.1f}" y2="{top + band*len(rows) - 4}" stroke="{T["grid"]}" stroke-width="1"/>'
+        b += text(x, top + band * len(rows) + 12, f"{tick:.2g}×" if tick else "0", T["t3"], 11, anchor="middle")
+    x1 = left + sx
+    b += f'<line x1="{x1:.1f}" y1="{top-10}" x2="{x1:.1f}" y2="{top + band*len(rows)}" stroke="{T["t3"]}" stroke-width="1.5"/>'
+    for i, t in enumerate(rows):
         y = top + i * band
-        b += text(left - 12, y + bh + 6, lab, T["t1"] if k == "all" else T["t2"], 13, 600 if k == "all" else 400, "end")
-        for j, (a, c) in enumerate([("nonhuman", T["s"][0]), ("ponytail", T["s"][1])]):
-            yy = y + j * (bh + inner); v = rel[k][a]
-            b += bar(left, yy, v * sx, bh, c)
-            b += text(left + v * sx + 6, yy + bh - 3, f"{v:.2f}×", T["t1"] if a == "nonhuman" else T["t3"], 12, 600 if a == "nonhuman" else 400, halo=T["gap"])
-    return svg(w, h, b, "Billed cost relative to no skill, by language")
+        b += text(left - 10, y + 13, t, T["t2"], 11, anchor="end")
+        v = per_task[t]["nonhuman"]; vp = per_task[t]["ponytail"]
+        b += bar(left, y, vp * sx, 4, T["s"][1], 2)
+        b += bar(left, y + 5, v * sx, bh - 3, T["s"][0], 3)
+        b += text(left + max(v, vp) * sx + 6, y + 12, f"{v:.2f}×", T["t1"], 11, 600, halo=T["gap"])
+    return svg(w, h, b, "Billed cost per held-out task relative to no skill")
 
 
 def anatomy(T):
@@ -127,6 +125,6 @@ def anatomy(T):
 
 
 for mode, T in THEME.items():
-    for name, fn in (("hero", hero), ("cost-by-language", by_language), ("cost-anatomy", anatomy)):
+    for name, fn in (("hero", hero), ("cost-by-task", by_task), ("cost-anatomy", anatomy)):
         open(os.path.join(OUT, f"{name}-{mode}.svg"), "w").write(fn(T))
 print(sorted(os.listdir(OUT)))

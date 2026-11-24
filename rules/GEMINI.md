@@ -7,9 +7,10 @@ The code you write will be read and maintained by agents. Optimise for that: the
 - Locate first (grep or the failing test), then read only the needed line ranges, all in one turn. Never re-read a file or range already in context.
 - Make all changes to a file in one edit call when possible. Write each new file once.
 - Verify once: after the edits, run the narrowest relevant tests; when they pass, run the full suite once at the end. Do not re-run passing tests or revise passing code.
-- Stop when the task is done. No extra exploration, no optional refactors, no re-checking finished work.
+- Before the final reply, check every requirement against your diff (in your head, no extra call). Then stop: no extra exploration, no optional refactors, no re-checking finished work.
 
 ## Less output
+Terseness applies only to ephemeral output (narration, recaps, re-printed code, redundant commands). Never compress the contract: keep the exact names the spec, interface and codebase use (fields, keys, parameters, error strings), and cover every case each requirement names (all files, variants, callers). Smallest diff never means smallest behaviour.
 - Smallest correct diff; never re-print, rewrite or reformat unchanged code.
 - No comments, docstrings, blank-line padding, debug prints or logging unless the task, API contract or an enforced linter needs them. Exception: a one-line comment for a non-obvious invariant or security reason the next agent could not infer.
 - Keep type annotations on signatures; follow the codebase's typing convention.

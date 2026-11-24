@@ -1,0 +1,362 @@
+[
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r11",
+"task": "t1",
+"func": [
+6,
+6
+],
+"sec": [
+4,
+4
+],
+"added_tok": 428
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r11",
+"task": "t2",
+"func": [
+6,
+6
+],
+"sec": [
+5,
+5
+],
+"added_tok": 508
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r11",
+"task": "t3",
+"func": [
+5,
+5
+],
+"sec": [
+4,
+4
+],
+"added_tok": 457
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r11",
+"task": "t4",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 522
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r11",
+"task": "t5",
+"func": [
+9,
+9
+],
+"sec": [
+6,
+6
+],
+"added_tok": 1154
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r11",
+"task": "t6",
+"func": [
+6,
+6
+],
+"sec": [
+7,
+7
+],
+"added_tok": 585
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r11",
+"task": "t7",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+6
+],
+"added_tok": 820
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r11",
+"task": "t8",
+"func": [
+5,
+5
+],
+"sec": [
+5,
+5
+],
+"added_tok": 374
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r12",
+"task": "t1",
+"func": [
+6,
+6
+],
+"sec": [
+4,
+4
+],
+"added_tok": 425
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r12",
+"task": "t2",
+"func": [
+6,
+6
+],
+"sec": [
+5,
+5
+],
+"added_tok": 514
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r12",
+"task": "t3",
+"func": [
+5,
+5
+],
+"sec": [
+4,
+4
+],
+"added_tok": 451
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r12",
+"task": "t4",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 501
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r12",
+"task": "t5",
+"func": [
+9,
+9
+],
+"sec": [
+6,
+6
+],
+"added_tok": 1204
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r12",
+"task": "t6",
+"func": [
+6,
+6
+],
+"sec": [
+7,
+7
+],
+"added_tok": 577
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r12",
+"task": "t7",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+6
+],
+"added_tok": 942
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r12",
+"task": "t8",
+"func": [
+5,
+5
+],
+"sec": [
+5,
+5
+],
+"added_tok": 373
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r13",
+"task": "t1",
+"func": [
+6,
+6
+],
+"sec": [
+4,
+4
+],
+"added_tok": 158
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r13",
+"task": "t2",
+"func": [
+6,
+6
+],
+"sec": [
+5,
+5
+],
+"added_tok": 241
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r13",
+"task": "t3",
+"func": [
+5,
+5
+],
+"sec": [
+4,
+4
+],
+"added_tok": 213
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r13",
+"task": "t4",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 228
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r13",
+"task": "t5",
+"func": [
+9,
+9
+],
+"sec": [
+6,
+6
+],
+"added_tok": 721
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r13",
+"task": "t6",
+"func": [
+6,
+6
+],
+"sec": [
+7,
+7
+],
+"added_tok": 278
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r13",
+"task": "t7",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+6
+],
+"added_tok": 406
+},
+{
+"lang": "py",
+"arm": "dense12",
+"run": "r13",
+"task": "t8",
+"func": [
+5,
+5
+],
+"sec": [
+5,
+5
+],
+"added_tok": 166
+}
+]
