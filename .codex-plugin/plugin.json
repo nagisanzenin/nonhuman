@@ -1,0 +1,10 @@
+{
+  "name": "nonhuman",
+  "version": "1.0.0",
+  "description": "Agent-first coding: optimise code and workflow for the next agent, not a human reader. -30% billed tokens on Opus across Python, TypeScript, Rust and C with no measured quality or security loss.",
+  "author": { "name": "Quan Duong" },
+  "homepage": "https://github.com/nagisanzenin/nonhuman",
+  "keywords": ["tokens", "cost", "agentic-coding", "skills", "agent-skills"],
+  "skills": "./skills/",
+  "interface": { "displayName": "nonhuman", "category": "development" }
+}

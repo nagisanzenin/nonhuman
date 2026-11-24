@@ -1,0 +1,1442 @@
+[
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r1",
+"task": "t1",
+"func": [
+6,
+6
+],
+"sec": [
+4,
+4
+],
+"added_tok": 180
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r1",
+"task": "t2",
+"func": [
+6,
+6
+],
+"sec": [
+5,
+5
+],
+"added_tok": 253
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r1",
+"task": "t3",
+"func": [
+5,
+5
+],
+"sec": [
+4,
+4
+],
+"added_tok": 231
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r1",
+"task": "t4",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 233
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r1",
+"task": "t5",
+"func": [
+9,
+9
+],
+"sec": [
+6,
+6
+],
+"added_tok": 795
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r1",
+"task": "t6",
+"func": [
+6,
+6
+],
+"sec": [
+7,
+7
+],
+"added_tok": 265
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r1",
+"task": "t7",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+6
+],
+"added_tok": 500
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r1",
+"task": "t8",
+"func": [
+5,
+5
+],
+"sec": [
+5,
+5
+],
+"added_tok": 169
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r2",
+"task": "t1",
+"func": [
+6,
+6
+],
+"sec": [
+4,
+4
+],
+"added_tok": 189
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r2",
+"task": "t2",
+"func": [
+6,
+6
+],
+"sec": [
+5,
+5
+],
+"added_tok": 249
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r2",
+"task": "t3",
+"func": [
+5,
+5
+],
+"sec": [
+4,
+4
+],
+"added_tok": 231
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r2",
+"task": "t4",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 230
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r2",
+"task": "t5",
+"func": [
+9,
+9
+],
+"sec": [
+6,
+6
+],
+"added_tok": 746
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r2",
+"task": "t6",
+"func": [
+6,
+6
+],
+"sec": [
+7,
+7
+],
+"added_tok": 247
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r2",
+"task": "t7",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+6
+],
+"added_tok": 594
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r2",
+"task": "t8",
+"func": [
+5,
+5
+],
+"sec": [
+5,
+5
+],
+"added_tok": 168
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r3",
+"task": "t1",
+"func": [
+6,
+6
+],
+"sec": [
+4,
+4
+],
+"added_tok": 622
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r3",
+"task": "t2",
+"func": [
+6,
+6
+],
+"sec": [
+5,
+5
+],
+"added_tok": 632
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r3",
+"task": "t3",
+"func": [
+5,
+5
+],
+"sec": [
+4,
+4
+],
+"added_tok": 597
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r3",
+"task": "t4",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 694
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r3",
+"task": "t5",
+"func": [
+9,
+9
+],
+"sec": [
+6,
+6
+],
+"added_tok": 1723
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r3",
+"task": "t6",
+"func": [
+6,
+6
+],
+"sec": [
+7,
+7
+],
+"added_tok": 718
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r3",
+"task": "t7",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+6
+],
+"added_tok": 1205
+},
+{
+"lang": "py",
+"arm": "baseline",
+"run": "r3",
+"task": "t8",
+"func": [
+5,
+5
+],
+"sec": [
+5,
+5
+],
+"added_tok": 484
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r1",
+"task": "t1",
+"func": [
+6,
+6
+],
+"sec": [
+4,
+4
+],
+"added_tok": 405
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r1",
+"task": "t2",
+"func": [
+6,
+6
+],
+"sec": [
+5,
+5
+],
+"added_tok": 555
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r1",
+"task": "t3",
+"func": [
+5,
+5
+],
+"sec": [
+4,
+4
+],
+"added_tok": 493
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r1",
+"task": "t4",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 485
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r1",
+"task": "t5",
+"func": [
+9,
+9
+],
+"sec": [
+6,
+6
+],
+"added_tok": 1215
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r1",
+"task": "t6",
+"func": [
+6,
+6
+],
+"sec": [
+7,
+7
+],
+"added_tok": 577
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r1",
+"task": "t7",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+6
+],
+"added_tok": 820
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r1",
+"task": "t8",
+"func": [
+5,
+5
+],
+"sec": [
+5,
+5
+],
+"added_tok": 377
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r2",
+"task": "t1",
+"func": [
+6,
+6
+],
+"sec": [
+4,
+4
+],
+"added_tok": 421
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r2",
+"task": "t2",
+"func": [
+6,
+6
+],
+"sec": [
+5,
+5
+],
+"added_tok": 519
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r2",
+"task": "t3",
+"func": [
+5,
+5
+],
+"sec": [
+4,
+4
+],
+"added_tok": 473
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r2",
+"task": "t4",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 515
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r2",
+"task": "t5",
+"func": [
+9,
+9
+],
+"sec": [
+6,
+6
+],
+"added_tok": 1295
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r2",
+"task": "t6",
+"func": [
+6,
+6
+],
+"sec": [
+7,
+7
+],
+"added_tok": 613
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r2",
+"task": "t7",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+6
+],
+"added_tok": 692
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r2",
+"task": "t8",
+"func": [
+5,
+5
+],
+"sec": [
+5,
+5
+],
+"added_tok": 398
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r3",
+"task": "t1",
+"func": [
+6,
+6
+],
+"sec": [
+4,
+4
+],
+"added_tok": 390
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r3",
+"task": "t2",
+"func": [
+6,
+6
+],
+"sec": [
+5,
+5
+],
+"added_tok": 485
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r3",
+"task": "t3",
+"func": [
+5,
+5
+],
+"sec": [
+4,
+4
+],
+"added_tok": 443
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r3",
+"task": "t4",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 489
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r3",
+"task": "t5",
+"func": [
+9,
+9
+],
+"sec": [
+6,
+6
+],
+"added_tok": 1312
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r3",
+"task": "t6",
+"func": [
+6,
+6
+],
+"sec": [
+7,
+7
+],
+"added_tok": 568
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r3",
+"task": "t7",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+6
+],
+"added_tok": 837
+},
+{
+"lang": "py",
+"arm": "ponytail+nonhuman_v1",
+"run": "r3",
+"task": "t8",
+"func": [
+5,
+5
+],
+"sec": [
+5,
+5
+],
+"added_tok": 391
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r1",
+"task": "t1",
+"func": [
+6,
+6
+],
+"sec": [
+4,
+4
+],
+"added_tok": 158
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r1",
+"task": "t2",
+"func": [
+6,
+6
+],
+"sec": [
+5,
+5
+],
+"added_tok": 261
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r1",
+"task": "t3",
+"func": [
+5,
+5
+],
+"sec": [
+4,
+4
+],
+"added_tok": 211
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r1",
+"task": "t4",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 225
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r1",
+"task": "t5",
+"func": [
+9,
+9
+],
+"sec": [
+6,
+6
+],
+"added_tok": 698
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r1",
+"task": "t6",
+"func": [
+6,
+6
+],
+"sec": [
+7,
+7
+],
+"added_tok": 226
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r1",
+"task": "t7",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+6
+],
+"added_tok": 348
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r1",
+"task": "t8",
+"func": [
+5,
+5
+],
+"sec": [
+5,
+5
+],
+"added_tok": 154
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r2",
+"task": "t1",
+"func": [
+6,
+6
+],
+"sec": [
+4,
+4
+],
+"added_tok": 159
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r2",
+"task": "t2",
+"func": [
+6,
+6
+],
+"sec": [
+5,
+5
+],
+"added_tok": 230
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r2",
+"task": "t3",
+"func": [
+5,
+5
+],
+"sec": [
+4,
+4
+],
+"added_tok": 204
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r2",
+"task": "t4",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 228
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r2",
+"task": "t5",
+"func": [
+9,
+9
+],
+"sec": [
+6,
+6
+],
+"added_tok": 704
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r2",
+"task": "t6",
+"func": [
+6,
+6
+],
+"sec": [
+7,
+7
+],
+"added_tok": 224
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r2",
+"task": "t7",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+6
+],
+"added_tok": 418
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r2",
+"task": "t8",
+"func": [
+5,
+5
+],
+"sec": [
+5,
+5
+],
+"added_tok": 157
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r3",
+"task": "t1",
+"func": [
+6,
+6
+],
+"sec": [
+4,
+4
+],
+"added_tok": 158
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r3",
+"task": "t2",
+"func": [
+6,
+6
+],
+"sec": [
+5,
+5
+],
+"added_tok": 226
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r3",
+"task": "t3",
+"func": [
+5,
+5
+],
+"sec": [
+4,
+4
+],
+"added_tok": 206
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r3",
+"task": "t4",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 228
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r3",
+"task": "t5",
+"func": [
+9,
+9
+],
+"sec": [
+6,
+6
+],
+"added_tok": 656
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r3",
+"task": "t6",
+"func": [
+6,
+6
+],
+"sec": [
+7,
+7
+],
+"added_tok": 227
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r3",
+"task": "t7",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+6
+],
+"added_tok": 355
+},
+{
+"lang": "py",
+"arm": "nonhuman_v1",
+"run": "r3",
+"task": "t8",
+"func": [
+5,
+5
+],
+"sec": [
+5,
+5
+],
+"added_tok": 157
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r1",
+"task": "t1",
+"func": [
+6,
+6
+],
+"sec": [
+4,
+4
+],
+"added_tok": 430
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r1",
+"task": "t2",
+"func": [
+6,
+6
+],
+"sec": [
+5,
+5
+],
+"added_tok": 501
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r1",
+"task": "t3",
+"func": [
+5,
+5
+],
+"sec": [
+4,
+4
+],
+"added_tok": 484
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r1",
+"task": "t4",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 492
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r1",
+"task": "t5",
+"func": [
+9,
+9
+],
+"sec": [
+6,
+6
+],
+"added_tok": 1261
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r1",
+"task": "t6",
+"func": [
+6,
+6
+],
+"sec": [
+7,
+7
+],
+"added_tok": 591
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r1",
+"task": "t7",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+6
+],
+"added_tok": 807
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r1",
+"task": "t8",
+"func": [
+5,
+5
+],
+"sec": [
+5,
+5
+],
+"added_tok": 365
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r2",
+"task": "t1",
+"func": [
+6,
+6
+],
+"sec": [
+4,
+4
+],
+"added_tok": 412
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r2",
+"task": "t2",
+"func": [
+6,
+6
+],
+"sec": [
+5,
+5
+],
+"added_tok": 496
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r2",
+"task": "t3",
+"func": [
+5,
+5
+],
+"sec": [
+4,
+4
+],
+"added_tok": 473
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r2",
+"task": "t4",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 495
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r2",
+"task": "t5",
+"func": [
+9,
+9
+],
+"sec": [
+6,
+6
+],
+"added_tok": 1196
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r2",
+"task": "t6",
+"func": [
+6,
+6
+],
+"sec": [
+7,
+7
+],
+"added_tok": 538
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r2",
+"task": "t7",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+6
+],
+"added_tok": 705
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r2",
+"task": "t8",
+"func": [
+5,
+5
+],
+"sec": [
+5,
+5
+],
+"added_tok": 370
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r3",
+"task": "t1",
+"func": [
+6,
+6
+],
+"sec": [
+4,
+4
+],
+"added_tok": 419
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r3",
+"task": "t2",
+"func": [
+6,
+6
+],
+"sec": [
+5,
+5
+],
+"added_tok": 485
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r3",
+"task": "t3",
+"func": [
+5,
+5
+],
+"sec": [
+4,
+4
+],
+"added_tok": 466
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r3",
+"task": "t4",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 504
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r3",
+"task": "t5",
+"func": [
+9,
+9
+],
+"sec": [
+6,
+6
+],
+"added_tok": 1209
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r3",
+"task": "t6",
+"func": [
+6,
+6
+],
+"sec": [
+7,
+7
+],
+"added_tok": 505
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r3",
+"task": "t7",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+6
+],
+"added_tok": 727
+},
+{
+"lang": "py",
+"arm": "ponytail",
+"run": "r3",
+"task": "t8",
+"func": [
+5,
+5
+],
+"sec": [
+5,
+5
+],
+"added_tok": 385
+}
+]

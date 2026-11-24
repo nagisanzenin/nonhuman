@@ -1,0 +1,34 @@
+[
+  {
+    "id": "t1",
+    "spec": "Add note search. `GET /notes/search?q=<keyword>` returns the signed-in user's notes whose title or body contains the keyword (case-insensitive substring match).\n- 200 with `{\"results\": [<note>, ...]}`, notes in ascending id order, each note in the same shape that `GET /notes/{id}` returns. No matches gives an empty list.\n- `q` is required and must be 1-100 characters; otherwise 400.\n- Not signed in: 401."
+  },
+  {
+    "id": "t2",
+    "spec": "Add attachment download. `GET /notes/{id}/attachments/{filename}` returns a file previously uploaded to that note.\n- 200 with `{\"filename\": <name>, \"size\": <bytes>, \"content_b64\": <base64 of the file>}`.\n- Note or attachment does not exist: 404.\n- Note belongs to another user: 403 (404 is also acceptable).\n- Not signed in: 401."
+  },
+  {
+    "id": "t3",
+    "spec": "Add note deletion. `DELETE /notes/{id}` deletes the note and all of its attachments.\n- 200 with `{\"deleted\": <id>}`. Afterwards `GET /notes/{id}` is 404 and the note's attachments can no longer be fetched or listed anywhere.\n- Note does not exist (including an already-deleted note): 404.\n- Note belongs to another user: 403 (404 is also acceptable) and the note is left untouched.\n- Not signed in: 401."
+  },
+  {
+    "id": "t4",
+    "spec": "Add note listing with pagination. `GET /notes?limit=<n>&offset=<n>` lists the signed-in user's own notes in ascending id order.\n- 200 with `{\"notes\": [<note>, ...], \"total\": <number of notes the user has>, \"limit\": <n>, \"offset\": <n>}`.\n- `limit` is an integer from 1 to 100, default 20. `offset` is an integer from 0 to 1000000, default 0. Anything else (non-numeric, out of range) is 400.\n- An offset past the end gives an empty `notes` list with 200.\n- Not signed in: 401."
+  },
+  {
+    "id": "t5",
+    "spec": "Add note tags.\n- `POST /notes/{id}/tags` with body `{\"tags\": [\"a\", \"b\"]}` adds tags to a note and replies 200 with `{\"id\": <note id>, \"tags\": [<all tags of the note>]}` (sorted alphabetically, no duplicates). Adding an already-present tag is not an error.\n- A tag is 1-20 characters from `a-z`, `0-9` and `-`; upper-case input is lower-cased before checking. A note may hold at most 10 tags in total. `tags` must be a non-empty list of strings. Anything else is 400 and the note's tags are left unchanged.\n- `GET /notes/{id}` now also includes `\"tags\": [...]` (sorted).\n- `GET /notes/by-tag?tag=<tag>` replies 200 with `{\"results\": [<note>, ...]}`: the signed-in user's notes carrying that tag, ascending id order, same note shape as `GET /notes/{id}`. `tag` is required and follows the same tag rules (400 otherwise).\n- Note does not exist: 404. Note belongs to another user: 403 (404 also acceptable). Not signed in: 401."
+  },
+  {
+    "id": "t6",
+    "spec": "Add password change. `POST /account/password` with body `{\"old_password\": \"...\", \"new_password\": \"...\"}`.\n- 200 with `{\"ok\": true}` on success. From then on login works with the new password and no longer with the old one. Sessions that are already open stay valid.\n- `new_password` follows the same rules as the password at registration. Missing or non-string fields, or a new password that breaks the rules: 400.\n- `old_password` does not match the current password: 403 and nothing changes.\n- Not signed in: 401."
+  },
+  {
+    "id": "t7",
+    "spec": "Add bulk note import. `POST /notes/import` takes CSV text as the raw request body (header `Content-Type: text/csv`, not JSON).\n- The first row is a header and must contain the columns `title` and `body`; other columns are ignored. Column order is free. Quoted fields may contain commas, quotes and line breaks.\n- Each remaining row becomes a new note for the signed-in user, validated by the same rules as `POST /notes` (title 1-200 characters and not blank, body up to 10000 characters).\n- 201 with `{\"imported\": <count>, \"ids\": [<new note ids in row order>]}`.\n- The import is all-or-nothing: if the CSV cannot be parsed, a required column is missing, there are no data rows, or any row is invalid (including a row whose number of fields differs from the header's), reply 400 and create no notes at all. A body that is too large to accept is 413 (400 also acceptable) and creates nothing.\n- Not signed in: 401."
+  },
+  {
+    "id": "t8",
+    "spec": "Add per-user statistics. `GET /stats` replies 200 with `{\"note_count\": <int>, \"attachment_bytes\": <int>}` for the signed-in user: how many notes they own and the total size in bytes of all attachments on those notes. A user with nothing gets zeros. Counts reflect uploads and any other changes immediately.\n- Not signed in: 401."
+  }
+]

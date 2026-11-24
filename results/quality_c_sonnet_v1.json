@@ -1,0 +1,902 @@
+[
+{
+"lang": "c",
+"arm": "baseline",
+"run": "r1",
+"task": "c1",
+"func": [
+11,
+11
+],
+"sec": [
+18,
+18
+],
+"added_tok": 374
+},
+{
+"lang": "c",
+"arm": "baseline",
+"run": "r1",
+"task": "c2",
+"func": [
+14,
+14
+],
+"sec": [
+14,
+14
+],
+"added_tok": 922
+},
+{
+"lang": "c",
+"arm": "baseline",
+"run": "r1",
+"task": "c3",
+"func": [
+11,
+11
+],
+"sec": [
+11,
+11
+],
+"added_tok": 481
+},
+{
+"lang": "c",
+"arm": "baseline",
+"run": "r1",
+"task": "c4",
+"func": [
+10,
+10
+],
+"sec": [
+9,
+9
+],
+"added_tok": 665
+},
+{
+"lang": "c",
+"arm": "baseline",
+"run": "r1",
+"task": "c5",
+"func": [
+14,
+14
+],
+"sec": [
+15,
+15
+],
+"added_tok": 545
+},
+{
+"lang": "c",
+"arm": "baseline",
+"run": "r2",
+"task": "c1",
+"func": [
+11,
+11
+],
+"sec": [
+18,
+18
+],
+"added_tok": 373
+},
+{
+"lang": "c",
+"arm": "baseline",
+"run": "r2",
+"task": "c2",
+"func": [
+14,
+14
+],
+"sec": [
+14,
+14
+],
+"added_tok": 1026
+},
+{
+"lang": "c",
+"arm": "baseline",
+"run": "r2",
+"task": "c3",
+"func": [
+11,
+11
+],
+"sec": [
+11,
+11
+],
+"added_tok": 479
+},
+{
+"lang": "c",
+"arm": "baseline",
+"run": "r2",
+"task": "c4",
+"func": [
+10,
+10
+],
+"sec": [
+9,
+9
+],
+"added_tok": 668
+},
+{
+"lang": "c",
+"arm": "baseline",
+"run": "r2",
+"task": "c5",
+"func": [
+14,
+14
+],
+"sec": [
+8,
+15
+],
+"added_tok": 525
+},
+{
+"lang": "c",
+"arm": "baseline",
+"run": "r3",
+"task": "c1",
+"func": [
+11,
+11
+],
+"sec": [
+18,
+18
+],
+"added_tok": 369
+},
+{
+"lang": "c",
+"arm": "baseline",
+"run": "r3",
+"task": "c2",
+"func": [
+14,
+14
+],
+"sec": [
+14,
+14
+],
+"added_tok": 1039
+},
+{
+"lang": "c",
+"arm": "baseline",
+"run": "r3",
+"task": "c3",
+"func": [
+11,
+11
+],
+"sec": [
+11,
+11
+],
+"added_tok": 477
+},
+{
+"lang": "c",
+"arm": "baseline",
+"run": "r3",
+"task": "c4",
+"func": [
+10,
+10
+],
+"sec": [
+9,
+9
+],
+"added_tok": 763
+},
+{
+"lang": "c",
+"arm": "baseline",
+"run": "r3",
+"task": "c5",
+"func": [
+14,
+14
+],
+"sec": [
+15,
+15
+],
+"added_tok": 529
+},
+{
+"lang": "c",
+"arm": "ponytail+nonhuman_v1",
+"run": "r1",
+"task": "c1",
+"func": [
+11,
+11
+],
+"sec": [
+18,
+18
+],
+"added_tok": 297
+},
+{
+"lang": "c",
+"arm": "ponytail+nonhuman_v1",
+"run": "r1",
+"task": "c2",
+"func": [
+14,
+14
+],
+"sec": [
+14,
+14
+],
+"added_tok": 758
+},
+{
+"lang": "c",
+"arm": "ponytail+nonhuman_v1",
+"run": "r1",
+"task": "c3",
+"func": [
+11,
+11
+],
+"sec": [
+11,
+11
+],
+"added_tok": 408
+},
+{
+"lang": "c",
+"arm": "ponytail+nonhuman_v1",
+"run": "r1",
+"task": "c4",
+"func": [
+10,
+10
+],
+"sec": [
+9,
+9
+],
+"added_tok": 551
+},
+{
+"lang": "c",
+"arm": "ponytail+nonhuman_v1",
+"run": "r1",
+"task": "c5",
+"func": [
+14,
+14
+],
+"sec": [
+15,
+15
+],
+"added_tok": 450
+},
+{
+"lang": "c",
+"arm": "ponytail+nonhuman_v1",
+"run": "r2",
+"task": "c1",
+"func": [
+11,
+11
+],
+"sec": [
+18,
+18
+],
+"added_tok": 298
+},
+{
+"lang": "c",
+"arm": "ponytail+nonhuman_v1",
+"run": "r2",
+"task": "c2",
+"func": [
+14,
+14
+],
+"sec": [
+14,
+14
+],
+"added_tok": 848
+},
+{
+"lang": "c",
+"arm": "ponytail+nonhuman_v1",
+"run": "r2",
+"task": "c3",
+"func": [
+11,
+11
+],
+"sec": [
+11,
+11
+],
+"added_tok": 426
+},
+{
+"lang": "c",
+"arm": "ponytail+nonhuman_v1",
+"run": "r2",
+"task": "c4",
+"func": [
+10,
+10
+],
+"sec": [
+9,
+9
+],
+"added_tok": 480
+},
+{
+"lang": "c",
+"arm": "ponytail+nonhuman_v1",
+"run": "r2",
+"task": "c5",
+"func": [
+14,
+14
+],
+"sec": [
+15,
+15
+],
+"added_tok": 403
+},
+{
+"lang": "c",
+"arm": "ponytail+nonhuman_v1",
+"run": "r3",
+"task": "c1",
+"func": [
+11,
+11
+],
+"sec": [
+18,
+18
+],
+"added_tok": 259
+},
+{
+"lang": "c",
+"arm": "ponytail+nonhuman_v1",
+"run": "r3",
+"task": "c2",
+"func": [
+14,
+14
+],
+"sec": [
+14,
+14
+],
+"added_tok": 701
+},
+{
+"lang": "c",
+"arm": "ponytail+nonhuman_v1",
+"run": "r3",
+"task": "c3",
+"func": [
+11,
+11
+],
+"sec": [
+11,
+11
+],
+"added_tok": 435
+},
+{
+"lang": "c",
+"arm": "ponytail+nonhuman_v1",
+"run": "r3",
+"task": "c4",
+"func": [
+10,
+10
+],
+"sec": [
+9,
+9
+],
+"added_tok": 516
+},
+{
+"lang": "c",
+"arm": "ponytail+nonhuman_v1",
+"run": "r3",
+"task": "c5",
+"func": [
+14,
+14
+],
+"sec": [
+15,
+15
+],
+"added_tok": 457
+},
+{
+"lang": "c",
+"arm": "nonhuman_v1",
+"run": "r1",
+"task": "c1",
+"func": [
+11,
+11
+],
+"sec": [
+18,
+18
+],
+"added_tok": 304
+},
+{
+"lang": "c",
+"arm": "nonhuman_v1",
+"run": "r1",
+"task": "c2",
+"func": [
+14,
+14
+],
+"sec": [
+14,
+14
+],
+"added_tok": 893
+},
+{
+"lang": "c",
+"arm": "nonhuman_v1",
+"run": "r1",
+"task": "c3",
+"func": [
+11,
+11
+],
+"sec": [
+11,
+11
+],
+"added_tok": 396
+},
+{
+"lang": "c",
+"arm": "nonhuman_v1",
+"run": "r1",
+"task": "c4",
+"func": [
+10,
+10
+],
+"sec": [
+9,
+9
+],
+"added_tok": 514
+},
+{
+"lang": "c",
+"arm": "nonhuman_v1",
+"run": "r1",
+"task": "c5",
+"func": [
+14,
+14
+],
+"sec": [
+15,
+15
+],
+"added_tok": 398
+},
+{
+"lang": "c",
+"arm": "nonhuman_v1",
+"run": "r2",
+"task": "c1",
+"func": [
+11,
+11
+],
+"sec": [
+18,
+18
+],
+"added_tok": 312
+},
+{
+"lang": "c",
+"arm": "nonhuman_v1",
+"run": "r2",
+"task": "c2",
+"func": [
+14,
+14
+],
+"sec": [
+14,
+14
+],
+"added_tok": 709
+},
+{
+"lang": "c",
+"arm": "nonhuman_v1",
+"run": "r2",
+"task": "c3",
+"func": [
+11,
+11
+],
+"sec": [
+11,
+11
+],
+"added_tok": 412
+},
+{
+"lang": "c",
+"arm": "nonhuman_v1",
+"run": "r2",
+"task": "c4",
+"func": [
+10,
+10
+],
+"sec": [
+9,
+9
+],
+"added_tok": 564
+},
+{
+"lang": "c",
+"arm": "nonhuman_v1",
+"run": "r2",
+"task": "c5",
+"func": [
+14,
+14
+],
+"sec": [
+15,
+15
+],
+"added_tok": 461
+},
+{
+"lang": "c",
+"arm": "nonhuman_v1",
+"run": "r3",
+"task": "c1",
+"func": [
+11,
+11
+],
+"sec": [
+18,
+18
+],
+"added_tok": 303
+},
+{
+"lang": "c",
+"arm": "nonhuman_v1",
+"run": "r3",
+"task": "c2",
+"func": [
+14,
+14
+],
+"sec": [
+14,
+14
+],
+"added_tok": 892
+},
+{
+"lang": "c",
+"arm": "nonhuman_v1",
+"run": "r3",
+"task": "c3",
+"func": [
+11,
+11
+],
+"sec": [
+11,
+11
+],
+"added_tok": 405
+},
+{
+"lang": "c",
+"arm": "nonhuman_v1",
+"run": "r3",
+"task": "c4",
+"func": [
+10,
+10
+],
+"sec": [
+9,
+9
+],
+"added_tok": 570
+},
+{
+"lang": "c",
+"arm": "nonhuman_v1",
+"run": "r3",
+"task": "c5",
+"func": [
+14,
+14
+],
+"sec": [
+15,
+15
+],
+"added_tok": 437
+},
+{
+"lang": "c",
+"arm": "ponytail",
+"run": "r1",
+"task": "c1",
+"func": [
+11,
+11
+],
+"sec": [
+18,
+18
+],
+"added_tok": 296
+},
+{
+"lang": "c",
+"arm": "ponytail",
+"run": "r1",
+"task": "c2",
+"func": [
+14,
+14
+],
+"sec": [
+14,
+14
+],
+"added_tok": 783
+},
+{
+"lang": "c",
+"arm": "ponytail",
+"run": "r1",
+"task": "c3",
+"func": [
+11,
+11
+],
+"sec": [
+11,
+11
+],
+"added_tok": 470
+},
+{
+"lang": "c",
+"arm": "ponytail",
+"run": "r1",
+"task": "c4",
+"func": [
+10,
+10
+],
+"sec": [
+9,
+9
+],
+"added_tok": 502
+},
+{
+"lang": "c",
+"arm": "ponytail",
+"run": "r1",
+"task": "c5",
+"func": [
+14,
+14
+],
+"sec": [
+15,
+15
+],
+"added_tok": 488
+},
+{
+"lang": "c",
+"arm": "ponytail",
+"run": "r2",
+"task": "c1",
+"func": [
+11,
+11
+],
+"sec": [
+18,
+18
+],
+"added_tok": 716
+},
+{
+"lang": "c",
+"arm": "ponytail",
+"run": "r2",
+"task": "c2",
+"func": [
+14,
+14
+],
+"sec": [
+14,
+14
+],
+"added_tok": 1265
+},
+{
+"lang": "c",
+"arm": "ponytail",
+"run": "r2",
+"task": "c3",
+"func": [
+11,
+11
+],
+"sec": [
+11,
+11
+],
+"added_tok": 718
+},
+{
+"lang": "c",
+"arm": "ponytail",
+"run": "r2",
+"task": "c4",
+"func": [
+10,
+10
+],
+"sec": [
+9,
+9
+],
+"added_tok": 749
+},
+{
+"lang": "c",
+"arm": "ponytail",
+"run": "r2",
+"task": "c5",
+"func": [
+14,
+14
+],
+"sec": [
+15,
+15
+],
+"added_tok": 733
+},
+{
+"lang": "c",
+"arm": "ponytail",
+"run": "r3",
+"task": "c1",
+"func": [
+11,
+11
+],
+"sec": [
+18,
+18
+],
+"added_tok": 868
+},
+{
+"lang": "c",
+"arm": "ponytail",
+"run": "r3",
+"task": "c2",
+"func": [
+14,
+14
+],
+"sec": [
+14,
+14
+],
+"added_tok": 1449
+},
+{
+"lang": "c",
+"arm": "ponytail",
+"run": "r3",
+"task": "c3",
+"func": [
+11,
+11
+],
+"sec": [
+11,
+11
+],
+"added_tok": 902
+},
+{
+"lang": "c",
+"arm": "ponytail",
+"run": "r3",
+"task": "c4",
+"func": [
+10,
+10
+],
+"sec": [
+9,
+9
+],
+"added_tok": 875
+},
+{
+"lang": "c",
+"arm": "ponytail",
+"run": "r3",
+"task": "c5",
+"func": [
+14,
+14
+],
+"sec": [
+15,
+15
+],
+"added_tok": 921
+}
+]

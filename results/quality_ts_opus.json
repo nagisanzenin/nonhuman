@@ -1,0 +1,677 @@
+[
+{
+"lang": "ts",
+"arm": "baseline",
+"run": "r11",
+"task": "s1",
+"func": [
+5,
+6
+],
+"sec": [
+8,
+8
+],
+"added_tok": 460
+},
+{
+"lang": "ts",
+"arm": "baseline",
+"run": "r11",
+"task": "s2",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+7
+],
+"added_tok": 276
+},
+{
+"lang": "ts",
+"arm": "baseline",
+"run": "r11",
+"task": "s3",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 436
+},
+{
+"lang": "ts",
+"arm": "baseline",
+"run": "r11",
+"task": "s4",
+"func": [
+3,
+5
+],
+"sec": [
+6,
+6
+],
+"added_tok": 561
+},
+{
+"lang": "ts",
+"arm": "baseline",
+"run": "r11",
+"task": "s5",
+"func": [
+4,
+5
+],
+"sec": [
+7,
+7
+],
+"added_tok": 315
+},
+{
+"lang": "ts",
+"arm": "baseline",
+"run": "r12",
+"task": "s1",
+"func": [
+5,
+6
+],
+"sec": [
+8,
+8
+],
+"added_tok": 430
+},
+{
+"lang": "ts",
+"arm": "baseline",
+"run": "r12",
+"task": "s2",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+7
+],
+"added_tok": 278
+},
+{
+"lang": "ts",
+"arm": "baseline",
+"run": "r12",
+"task": "s3",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 458
+},
+{
+"lang": "ts",
+"arm": "baseline",
+"run": "r12",
+"task": "s4",
+"func": [
+3,
+5
+],
+"sec": [
+6,
+6
+],
+"added_tok": 569
+},
+{
+"lang": "ts",
+"arm": "baseline",
+"run": "r12",
+"task": "s5",
+"func": [
+4,
+5
+],
+"sec": [
+7,
+7
+],
+"added_tok": 335
+},
+{
+"lang": "ts",
+"arm": "baseline",
+"run": "r13",
+"task": "s1",
+"func": [
+6,
+6
+],
+"sec": [
+8,
+8
+],
+"added_tok": 393
+},
+{
+"lang": "ts",
+"arm": "baseline",
+"run": "r13",
+"task": "s2",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+7
+],
+"added_tok": 262
+},
+{
+"lang": "ts",
+"arm": "baseline",
+"run": "r13",
+"task": "s3",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 466
+},
+{
+"lang": "ts",
+"arm": "baseline",
+"run": "r13",
+"task": "s4",
+"func": [
+3,
+5
+],
+"sec": [
+6,
+6
+],
+"added_tok": 567
+},
+{
+"lang": "ts",
+"arm": "baseline",
+"run": "r13",
+"task": "s5",
+"func": [
+4,
+5
+],
+"sec": [
+7,
+7
+],
+"added_tok": 332
+},
+{
+"lang": "ts",
+"arm": "nonhuman",
+"run": "r11",
+"task": "s1",
+"func": [
+5,
+6
+],
+"sec": [
+8,
+8
+],
+"added_tok": 360
+},
+{
+"lang": "ts",
+"arm": "nonhuman",
+"run": "r11",
+"task": "s2",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+7
+],
+"added_tok": 243
+},
+{
+"lang": "ts",
+"arm": "nonhuman",
+"run": "r11",
+"task": "s3",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 395
+},
+{
+"lang": "ts",
+"arm": "nonhuman",
+"run": "r11",
+"task": "s4",
+"func": [
+3,
+5
+],
+"sec": [
+6,
+6
+],
+"added_tok": 494
+},
+{
+"lang": "ts",
+"arm": "nonhuman",
+"run": "r11",
+"task": "s5",
+"func": [
+4,
+5
+],
+"sec": [
+7,
+7
+],
+"added_tok": 267
+},
+{
+"lang": "ts",
+"arm": "nonhuman",
+"run": "r12",
+"task": "s1",
+"func": [
+5,
+6
+],
+"sec": [
+8,
+8
+],
+"added_tok": 360
+},
+{
+"lang": "ts",
+"arm": "nonhuman",
+"run": "r12",
+"task": "s2",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+7
+],
+"added_tok": 243
+},
+{
+"lang": "ts",
+"arm": "nonhuman",
+"run": "r12",
+"task": "s3",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 400
+},
+{
+"lang": "ts",
+"arm": "nonhuman",
+"run": "r12",
+"task": "s4",
+"func": [
+3,
+5
+],
+"sec": [
+6,
+6
+],
+"added_tok": 492
+},
+{
+"lang": "ts",
+"arm": "nonhuman",
+"run": "r12",
+"task": "s5",
+"func": [
+4,
+5
+],
+"sec": [
+7,
+7
+],
+"added_tok": 274
+},
+{
+"lang": "ts",
+"arm": "nonhuman",
+"run": "r13",
+"task": "s1",
+"func": [
+5,
+6
+],
+"sec": [
+8,
+8
+],
+"added_tok": 393
+},
+{
+"lang": "ts",
+"arm": "nonhuman",
+"run": "r13",
+"task": "s2",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+7
+],
+"added_tok": 254
+},
+{
+"lang": "ts",
+"arm": "nonhuman",
+"run": "r13",
+"task": "s3",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 377
+},
+{
+"lang": "ts",
+"arm": "nonhuman",
+"run": "r13",
+"task": "s4",
+"func": [
+3,
+5
+],
+"sec": [
+6,
+6
+],
+"added_tok": 506
+},
+{
+"lang": "ts",
+"arm": "nonhuman",
+"run": "r13",
+"task": "s5",
+"func": [
+4,
+5
+],
+"sec": [
+7,
+7
+],
+"added_tok": 221
+},
+{
+"lang": "ts",
+"arm": "ponytail",
+"run": "r11",
+"task": "s1",
+"func": [
+5,
+6
+],
+"sec": [
+8,
+8
+],
+"added_tok": 808
+},
+{
+"lang": "ts",
+"arm": "ponytail",
+"run": "r11",
+"task": "s2",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+7
+],
+"added_tok": 568
+},
+{
+"lang": "ts",
+"arm": "ponytail",
+"run": "r11",
+"task": "s3",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 657
+},
+{
+"lang": "ts",
+"arm": "ponytail",
+"run": "r11",
+"task": "s4",
+"func": [
+3,
+5
+],
+"sec": [
+6,
+6
+],
+"added_tok": 817
+},
+{
+"lang": "ts",
+"arm": "ponytail",
+"run": "r11",
+"task": "s5",
+"func": [
+4,
+5
+],
+"sec": [
+7,
+7
+],
+"added_tok": 469
+},
+{
+"lang": "ts",
+"arm": "ponytail",
+"run": "r12",
+"task": "s1",
+"func": [
+5,
+6
+],
+"sec": [
+8,
+8
+],
+"added_tok": 1040
+},
+{
+"lang": "ts",
+"arm": "ponytail",
+"run": "r12",
+"task": "s2",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+7
+],
+"added_tok": 793
+},
+{
+"lang": "ts",
+"arm": "ponytail",
+"run": "r12",
+"task": "s3",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 970
+},
+{
+"lang": "ts",
+"arm": "ponytail",
+"run": "r12",
+"task": "s4",
+"func": [
+3,
+5
+],
+"sec": [
+6,
+6
+],
+"added_tok": 1077
+},
+{
+"lang": "ts",
+"arm": "ponytail",
+"run": "r12",
+"task": "s5",
+"func": [
+4,
+5
+],
+"sec": [
+7,
+7
+],
+"added_tok": 789
+},
+{
+"lang": "ts",
+"arm": "ponytail",
+"run": "r13",
+"task": "s1",
+"func": [
+5,
+6
+],
+"sec": [
+8,
+8
+],
+"added_tok": 808
+},
+{
+"lang": "ts",
+"arm": "ponytail",
+"run": "r13",
+"task": "s2",
+"func": [
+6,
+6
+],
+"sec": [
+6,
+7
+],
+"added_tok": 584
+},
+{
+"lang": "ts",
+"arm": "ponytail",
+"run": "r13",
+"task": "s3",
+"func": [
+7,
+7
+],
+"sec": [
+5,
+5
+],
+"added_tok": 725
+},
+{
+"lang": "ts",
+"arm": "ponytail",
+"run": "r13",
+"task": "s4",
+"func": [
+3,
+5
+],
+"sec": [
+6,
+6
+],
+"added_tok": 839
+},
+{
+"lang": "ts",
+"arm": "ponytail",
+"run": "r13",
+"task": "s5",
+"func": [
+4,
+5
+],
+"sec": [
+7,
+7
+],
+"added_tok": 510
+}
+]
