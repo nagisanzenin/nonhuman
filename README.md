@@ -1,6 +1,6 @@
 # nonhuman
 
-Agent-first coding mode. One 500-token skill for any coding agent.
+Agent-first coding mode. One 600-token skill for any coding agent.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
@@ -39,9 +39,10 @@ The decomposition is accounting, not a fit: on 84 runs (830 billed calls) it mat
 ## Rules (the whole skill)
 
 1. **Fewer calls.** Batch independent tool calls; read targeted ranges once; one edit per file; verify once.
-2. **Less output.** Minimal diffs; no comments, docstrings, narration or recap; reuse before writing; at most one compact test per task.
-3. **Small tool output.** `-q`, `| tail`, grep for failures.
-4. **Never cut** validation, auth, escaping, path-traversal guards, bounds/overflow checks, data-loss error handling.
+2. **Less output.** Minimal diffs; no narration, recap or comments; reuse before writing; at most one compact test per task.
+3. **Keep what the next agent needs.** Typed signatures (codebase convention); a one-line comment only for a non-obvious invariant or security reason.
+4. **Small tool output.** `-q`, `| tail`, grep for failures; never cut off the failing line.
+5. **Never cut** validation, auth, escaping, path-traversal guards, bounds/overflow checks, data-loss error handling.
 
 Full text: [`skills/nonhuman/SKILL.md`](skills/nonhuman/SKILL.md).
 
@@ -79,6 +80,6 @@ Install routes follow each platform's documented format; not all are verified li
 
 ## Limits
 
-One harness (Claude Code subagents), one model per study, 3 runs per cell, purpose-built fixtures. Prompts held several tasks, so batching across tasks helped; single-task sessions save less (TypeScript, already at ~7 calls, saved 3%). Thinking budget at harness default.
+One harness (Claude Code subagents), one model per study, 3 runs per cell, purpose-built fixtures. Prompts held several tasks, so batching across tasks helped; single-task sessions save less (TypeScript, already at ~7 calls, saved 3%). Thinking budget at harness default. Numbers are for v1.0; v1.1 only adds durable context (typed signatures, invariant comments), bounded at under 1% of session cost and not re-benchmarked; in the v1.0 runs the model already kept types on 107/107 new Python functions.
 
 MIT.

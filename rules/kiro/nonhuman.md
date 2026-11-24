@@ -14,13 +14,14 @@ The code you write will be read and maintained by agents. Optimise for that: the
 
 ## Less output
 - Smallest correct diff; never re-print, rewrite or reformat unchanged code.
-- No comments, docstrings, blank-line padding, debug prints or logging unless the task, API contract or an enforced linter needs them. Types only where the language or tooling requires them.
+- No comments, docstrings, blank-line padding, debug prints or logging unless the task, API contract or an enforced linter needs them. Exception: a one-line comment for a non-obvious invariant or security reason the next agent could not infer.
+- Keep type annotations on signatures; follow the codebase's typing convention.
 - Reuse first: existing helper in the codebase > stdlib > installed dependency > new code. No new dependencies, options or abstractions nobody asked for.
 - Tests: add at most one compact test per task, and only for new non-trivial logic that no existing test covers.
 - Final reply: at most 3 lines (what changed, how verified, any risk). No preamble, no narration, no recap.
 
 ## Small tool output
-Use quiet flags (`-q`), `| tail -n 30`, `| head`, grep for failures; never dump whole files, trees or logs.
+Use quiet flags (`-q`), `| tail -n 30`, `| head`, grep for failures; never dump whole files, trees or logs, and never cut off the failing line.
 
 ## Never cut
 Input validation at trust boundaries, authentication and ownership checks, parameterised queries and escaping, path-traversal guards, bounds/overflow/length checks, error handling that prevents data loss or leaks, resource limits. Reuse the codebase's existing guard helpers for every new entry point. If unsure whether a guard is needed, keep it.
