@@ -1,0 +1,10 @@
+tasks complete with gold control resolved: 16/16  total $4.18
+usd              baseline  rel=1.000 CI95=(1.00-1.00)
+usd              ponytail  rel=1.005 CI95=(0.89-1.11)
+usd              nonhuman  rel=0.843 CI95=(0.70-0.97)
+anthropic_units  baseline  rel=1.000 CI95=(1.00-1.00)
+anthropic_units  ponytail  rel=1.059 CI95=(0.90-1.21)
+anthropic_units  nonhuman  rel=0.816 CI95=(0.64-0.96)
+baseline  calls/run=52.7 resolved=14/16 vs-baseline W0/L0 think/run=35079
+ponytail  calls/run=54.2 resolved=12/16 vs-baseline W0/L2 think/run=33728
+nonhuman  calls/run=39.2 resolved=12/16 vs-baseline W0/L2 think/run=30411

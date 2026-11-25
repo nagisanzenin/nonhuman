@@ -93,7 +93,7 @@ Install routes follow each platform's documented format; not all are verified li
 
 ## Limits
 
-- One model (Opus) and one harness (Claude Code subagents).
+- The primary result is one model (Opus) and one harness (Claude Code subagents). A second-model check on DeepSeek V4.1 Flash, run on the same 16 tasks, cut cost to 0.84× (0.70–0.97) and calls from 52.7 to 39.2. It also lost one task reproducibly, 0/3 against 2/3 for no skill: [`results/real_deepseek/RESULT.md`](results/real_deepseek/RESULT.md).
 - Real-repo tasks are Python only: Go and JS repos hung or ran out of memory under x86 emulation on the test machine, so they are not measured.
 - n=1 per arm per task. Equal resolve rates show no large regression, not parity at the level of a few points.
 - Thinking budget was left at the harness default.

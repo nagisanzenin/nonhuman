@@ -1,0 +1,3 @@
+{"sandbox":{"enabled":true,"autoAllowBashIfSandboxed":true,"allowUnsandboxedCommands":false,
+ "network":{"allowUnixSockets":["/Users/quanduong/.docker/run/docker.sock"],"allowLocalBinding":false}},
+ "permissions":{"deny":["WebFetch","WebSearch"]}}
