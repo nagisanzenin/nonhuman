@@ -24,7 +24,7 @@ def grade(short):
     t = TASKS[short]; out = os.path.join(R, "eval_ds", short); os.makedirs(out, exist_ok=True)
     patches = []
     for arm in sorted(os.listdir(os.path.join(R, "runs", short))):
-        for run in [r for r in sorted(os.listdir(os.path.join(R, "runs", short, arm))) if r == "r9"]:
+        for run in [r for r in sorted(os.listdir(os.path.join(R, "runs", short, arm))) if r in os.environ.get("RUNS", "r9").split()]:
             name = f"rb-{short}-{arm}-{run}"; p = collect(t, name)
             open(os.path.join(R, "runs", short, arm, run, "patch.diff"), "w").write(p)
             patches.append({"instance_id": t["instance_id"], "patch": p, "prefix": f"{arm}_{run}"})
