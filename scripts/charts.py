@@ -22,11 +22,13 @@ grades = {}
 for l in open(os.path.join(REAL, "grades_heldout.jsonl")):
     g = json.loads(l); grades[(g["task"], g["arm"])] = g
 VALID = [t for t in TASKS if grades[(t, "gold")]["resolved"]]
-tot = {a: sum(float(runs[(t, a)]["cost"]) for t in VALID) for a in ARMS}
+CR = 0.05  # Claude Opus 5.5 list prices relative to input: cache write 1.25, cache read 0.05, output 5
+cost = lambda r: float(r["in"]) + 1.25 * float(r["cw"]) + CR * float(r["cr"]) + 5 * float(r["out"])
+tot = {a: sum(cost(runs[(t, a)]) for t in VALID) for a in ARMS}
 rel = {a: tot[a] / tot["baseline"] for a in ARMS}
 calls = {a: st.mean(float(runs[(t, a)]["calls"]) for t in VALID) for a in ARMS}
 resolved = {a: sum(grades[(t, a)]["resolved"] for t in VALID) for a in ARMS}
-per_task = {t: {a: float(runs[(t, a)]["cost"]) / float(runs[(t, "baseline")]["cost"]) for a in ARMS} for t in VALID}
+per_task = {t: {a: cost(runs[(t, a)]) / cost(runs[(t, "baseline")]) for a in ARMS} for t in VALID}
 
 # per-run decomposition: prefix re-reads, context growth, visible output, thinking
 by = {}
@@ -37,8 +39,8 @@ parts = {a: {"prefix": [], "growth": [], "output": [], "thinking": []} for a in 
 for L in by.values():
     L.sort(key=lambda x: x["call"]); N, P = len(L), L[0]["ctx"]
     th = 5 * sum(x["think"] for x in L)
-    d = {"prefix": 0.1 * N * P + 1.15 * L[0]["cw"],
-         "growth": 1.25 * sum(x["cw"] for x in L[1:]) + 0.1 * (sum(x["cr"] for x in L) - N * P + L[0]["cw"]),
+    d = {"prefix": CR * N * P + (1.25 - CR) * L[0]["cw"],
+         "growth": 1.25 * sum(x["cw"] for x in L[1:]) + CR * (sum(x["cr"] for x in L) - N * P + L[0]["cw"]),
          "output": 5 * sum(x["out"] for x in L) - th, "thinking": th}
     for k, v in d.items():
         parts[L[0]["arm"]][k].append(v)

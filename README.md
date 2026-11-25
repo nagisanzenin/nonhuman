@@ -4,7 +4,7 @@ Agent-first coding mode. One 700-token skill for any coding agent.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
-  <img alt="-20% billed cost on 16 held-out SWE-Bench Pro tasks, 16/16 resolved (same as no skill), 13.7 to 11.2 model calls per run" src="assets/hero-light.svg">
+  <img alt="-18% billed cost at Claude Opus 5.5 list prices on 16 held-out SWE-Bench Pro tasks, 16/16 resolved (same as no skill), 13.7 to 11.2 model calls per run" src="assets/hero-light.svg">
 </picture>
 
 ## Philosophy
@@ -13,21 +13,23 @@ Code written by agents is increasingly read only by agents. Comments, padding, n
 
 ## Math
 
-An agent run is N model calls. Each call re-reads the fixed prefix P and everything appended so far (Δᵢ = tool results + own output), then emits visible output oᵢ and thinking hᵢ. With prices relative to base input (cache write 1.25, cache read 0.1, output 5):
+An agent run is N model calls. Each call re-reads the fixed prefix P and everything appended so far (Δᵢ = tool results + own output), then emits visible output oᵢ and thinking hᵢ. With Claude Opus 5.5 list prices relative to base input (cache write 1.25, cache read 0.05, output 5):
 
 ```
-C = P·(1.25u + 0.1N)  +  Σᵢ Δᵢ·(1.25 + 0.1(N − i))  +  5·Σᵢ (oᵢ + hᵢ)          E[C_task] = C / p_success
+C = P·(1.25u + 0.05N)  +  Σᵢ Δᵢ·(1.25 + 0.05(N − i))  +  5·Σᵢ (oᵢ + hᵢ)          E[C_task] = C / p_success
     prefix re-reads       context growth                 output + thinking
 ```
 
-The decomposition is accounting, not a fit: on 84 runs (830 billed calls) it matches every bill to within 0.02%. Measured on the 36-run Opus fixture study:
+The decomposition is accounting, not a fit: on 84 runs (830 billed calls) it matches every bill to within 0.02%. Measured on the 48 held-out SWE-Bench Pro runs (Opus 5.5, list prices):
 
-| quantity | value (Opus) |
+| quantity | value |
 |---|---|
-| one extra call | ≈ 13.8k units, 5.9% of a run · corr(N, C) = 0.88 |
-| one output token | ≈ 6.6 units: billed ×5, then re-read every later call |
-| cost split | prefix 39% · context growth 28% · output 27% · thinking 6% |
-| ceiling of "write terser code" | < 10% of the bill |
+| one extra call | ≈ 13.4k units, 6.7% of an average run · corr(N, C) = 0.63 |
+| an average call after the first | ≈ 13.3k units: re-read 3.7k · new context 3.7k · visible output 3.7k · thinking 2.2k |
+| cost split (no skill) | prefix 32% · context growth 30% · visible output 25% · thinking 13% |
+| ceiling of "write terser code" | the code is part of the visible output, a quarter of the bill |
+
+(Pricing note: these numbers use Opus 5.5's 5% cache read. Versions of this README before 2026-11-25 used the older 10% weight, which gave −20% instead of −18%.)
 
 **N is the lever.** Terse code helps; fewer calls helps more.
 
@@ -57,7 +59,7 @@ Full text: [`skills/nonhuman/SKILL.md`](skills/nonhuman/SKILL.md). Each rule's p
 
 | 16 held-out tasks, Opus, n=1 per arm | no skill | Ponytail | nonhuman v1.2 |
 |---|---|---|---|
-| billed cost (95% CI over tasks) | 1.00× | 0.98× (0.90–1.07) | **0.80× (0.74–0.87)** |
+| billed cost at Opus 5.5 list prices (95% CI over tasks) | 1.00× | 0.96× (0.89–1.04) | **0.82× (0.76–0.88)** |
 | model calls per run | 13.7 | 14.8 | **11.2** |
 | resolved (hidden FAIL_TO_PASS + PASS_TO_PASS) | 16/16 | 16/16 | **16/16** |
 
@@ -68,7 +70,7 @@ Full text: [`skills/nonhuman/SKILL.md`](skills/nonhuman/SKILL.md). Each rule's p
 
 ### Controlled fixtures (secondary)
 
-Four purpose-built services (Python, TypeScript, Rust, C) with hidden functional and **security** tests (SQL injection, path traversal, authz, overflow, XSS, ASan leaks). Specs never mention security. 3 runs per cell, several tasks per prompt.
+Four purpose-built services (Python, TypeScript, Rust, C) with hidden functional and **security** tests (SQL injection, path traversal, authz, overflow, XSS, ASan leaks). Specs never mention security. 3 runs per cell, several tasks per prompt. Costs in this table use the older 10% cache-read weight.
 
 | | no skill | Ponytail | nonhuman v1.0 | nonhuman v1.2 |
 |---|---|---|---|---|
