@@ -126,6 +126,6 @@ def anatomy(T):
 
 
 for mode, T in THEME.items():
-    for name, fn in (("hero", hero), ("cost-by-task", by_task), ("cost-anatomy", anatomy)):
+    for name, fn in (("hero", hero), ("cost-per-task", by_task), ("cost-anatomy", anatomy)):
         open(os.path.join(OUT, f"{name}-{mode}.svg"), "w").write(fn(T))
 print(sorted(os.listdir(OUT)))

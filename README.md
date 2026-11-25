@@ -51,8 +51,8 @@ Full text: [`skills/nonhuman/SKILL.md`](skills/nonhuman/SKILL.md). Each rule's p
 ### Real repositories (primary, pre-registered)
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/cost-by-task-dark.svg">
-  <img alt="Billed cost per held-out task relative to no skill" src="assets/cost-by-task-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cost-per-task-dark.svg">
+  <img alt="Billed cost per held-out task relative to no skill" src="assets/cost-per-task-light.svg">
 </picture>
 
 | 16 held-out tasks, Opus, n=1 per arm | no skill | Ponytail | nonhuman v1.2 |
