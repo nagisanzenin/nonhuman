@@ -2,5 +2,5 @@
   "name": "nonhuman",
   "description": "Agent-first coding mode that cuts billed tokens per correct, secure result.",
   "owner": { "name": "Quan Duong" },
-  "plugins": [ { "name": "nonhuman", "source": "./", "description": "Agent-first coding: optimise code and workflow for the next agent, not a human reader. -30% billed tokens on Opus across Python, TypeScript, Rust and C with no measured quality or security loss." } ]
+  "plugins": [ { "name": "nonhuman", "source": "./", "description": "Agent-first coding: optimise code and workflow for the next agent, not a human reader. -18% billed cost on 16 held-out SWE-Bench Pro tasks with Claude Opus 5.5, same resolve rate." } ]
 }
