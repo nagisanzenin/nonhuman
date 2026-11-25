@@ -78,7 +78,7 @@ def hero(T):
 
 def by_task(T):
     rows = sorted(VALID, key=lambda t: per_task[t]["nonhuman"])
-    w, left, right, top = 720, 64, 64, 64; bh, band = 12, 22
+    w, left, right, top = 720, 64, 64, 64; bh, band = 9, 26
     h = top + band * len(rows) + 36; xmax = 1.5; sx = (w - left - right) / xmax
     b = text(0, 18, "Billed cost per task relative to no skill", T["t1"], 15, 600)
     b += text(0, 38, f"held-out SWE-Bench Pro (hard, Python) · pre-registered · total nonhuman {rel['nonhuman']:.2f}× · Ponytail {rel['ponytail']:.2f}×", T["t3"], 12)
@@ -93,11 +93,12 @@ def by_task(T):
     b += f'<line x1="{x1:.1f}" y1="{top-10}" x2="{x1:.1f}" y2="{top + band*len(rows)}" stroke="{T["t3"]}" stroke-width="1.5"/>'
     for i, t in enumerate(rows):
         y = top + i * band
-        b += text(left - 10, y + 13, t, T["t2"], 11, anchor="end")
+        b += text(left - 10, y + bh + 4, t, T["t2"], 11, anchor="end")
         v = per_task[t]["nonhuman"]; vp = per_task[t]["ponytail"]
-        b += bar(left, y, vp * sx, 4, T["s"][1], 2)
-        b += bar(left, y + 5, v * sx, bh - 3, T["s"][0], 3)
-        b += text(left + max(v, vp) * sx + 6, y + 12, f"{v:.2f}×", T["t1"], 11, 600, halo=T["gap"])
+        b += bar(left, y, v * sx, bh, T["s"][0], 3)
+        b += text(left + v * sx + 6, y + bh - 1, f"{v:.2f}×", T["t1"], 11, 600, halo=T["gap"])
+        b += bar(left, y + bh + 2, vp * sx, bh, T["s"][1], 3)
+        b += text(left + vp * sx + 6, y + 2 * bh + 1, f"{vp:.2f}×", T["t3"], 10, halo=T["gap"])
     return svg(w, h, b, "Billed cost per held-out task relative to no skill")
 
 
