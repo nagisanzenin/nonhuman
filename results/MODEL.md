@@ -1,5 +1,11 @@
 # Token-cost model of an agentic coder (fitted on 48 runs, 437 API calls)
 
+> Correction, 2026-11-26: thinking tokens stay in context in this harness. In the per-call data, the cache write of
+> the next call is never smaller than the previous call's output including thinking. Section 1 is fixed below. The
+> measured shares in section 2 are unaffected, because the carried thinking was already counted under growth. The
+> lever estimates further down price thinking at 5 per token and so understate it by about a quarter. This document
+> uses the older cache-read weight of 0.1; Claude Opus 5.5 charges 0.05.
+
 Source data: per-call `usage` from the subagent transcripts of the north-star A/B (`billed.py` →
 `billed_calls.csv`, `billed_runs.csv`, `billed_decomposition.md`). Prices relative to base input = 1:
 cache write (5-min) 1.25, cache read 0.1, output 5, thinking billed as output (Anthropic pricing).
@@ -7,13 +13,13 @@ cache write (5-min) 1.25, cache read 0.1, output 5, thinking billed as output (A
 ## 1. The equation
 
 An agent run is a loop of N model calls. Call i sees the whole context so far, which is the fixed prefix P
-plus everything appended by earlier calls. Each call appends Δ_i = r_i + o_i (tool results it receives,
-visible output it emits). Every appended token is written to the prompt cache once and read back on every
-later call. Thinking tokens are billed but not carried into later calls.
+plus everything appended by earlier calls. Each call appends Δ_i = r_i + o_i + h_i (tool results it receives,
+visible output and thinking it emits). Every appended token is written to the prompt cache once and read back on every
+later call.
 
 ```
 C_run = P·(1.25·u + 0.1·N)                       prefix: system prompt + tool defs + rules + task
-      + Σ_i Δ_i·(1.25 + 0.1·(N − i))             growth: tool output and own output, re-read every call
+      + Σ_i Δ_i·(1.25 + 0.1·(N − i))             growth: tool output, own output and thinking, re-read every call
       + 5·Σ_i (o_i + h_i)                        output: visible output o_i and thinking h_i
 
 E[C_task] = C_run / p_success                    failed attempts and retries multiply everything
@@ -29,7 +35,7 @@ Effective price per token by where it sits:
 | prefix token | 0.1·N (+1.25 once if not shared) | re-read on every call |
 | tool-result token arriving at call i | 1.25 + 0.1·(N − i) ≈ 1.6 | written once, re-read after |
 | visible output token (code, commands, text) | 5 + 1.25 + 0.1·(N − i) ≈ 6.6 | billed as output, then carried as context |
-| thinking token | 5 | billed as output, not carried |
+| thinking token | 5 + 1.25 + 0.1·(N − i) ≈ 6.6 | billed as output, then carried as context |
 | one extra call | ≈ 12.5k units (measured, OLS) | 0.1·(P + current context) + its own output |
 
 ## 2. Fit to the data (means per run, all languages)

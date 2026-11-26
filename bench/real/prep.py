@@ -1,17 +1,22 @@
 """Prepare one agent run on a SWE-Bench Pro task: a no-network container from the official instance image,
 hidden tests removed, plus runs/<task>/<arm>/r<n>/{x, PROMPT.md}.
-usage: .venv/bin/python bench/prep.py TASK ARM RUN    (TASK = short id from tasks.json)"""
+usage: python3 bench/real/prep.py TASK ARM RUN    (TASK = short id, e.g. h01; ARM = baseline | ponytail | nonhuman)
+Needs data/pro-os and data/tasks.json (see bench/real/README.md). The nonhuman arm uses the pre-registered text
+results/real/skill_under_test.md; the ponytail arm needs Ponytail's SKILL.md saved as data/ponytail.md."""
 import json, os, subprocess, sys
-R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+R = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repository root
 sys.path.insert(0, os.path.join(R, "data", "pro-os"))
 from helper_code.image_uri import get_dockerhub_image_uri
-TASKS = {t["short"]: t for t in json.load(open(os.path.join(R, "tasks.json")))}
-RULES = {"baseline": None, "ponytail": os.path.join(R, "rules", "ponytail.md"), "nonhuman": os.path.join(R, "rules", "nonhuman_v12.md")}
+TASKS = {t["short"]: t for t in json.load(open(os.path.join(R, "data", "tasks.json")))}
+RULES = {"baseline": None, "ponytail": os.path.join(R, "data", "ponytail.md"),
+         "nonhuman": os.path.join(R, "results", "real", "skill_under_test.md")}
 sh = lambda *a: subprocess.run(a, check=True, capture_output=True, text=True).stdout
 
 
 def prep(short, arm, run):
     t = TASKS[short]; name = f"rb-{short}-{arm}-r{run}"
+    if RULES[arm] and not os.path.exists(RULES[arm]):
+        sys.exit(f"missing rule file for arm {arm}: {RULES[arm]}")
     img = get_dockerhub_image_uri(t["instance_id"], "jefzda", t["repo"])
     subprocess.run(["docker", "rm", "-f", name], capture_output=True)
     sh("docker", "run", "-d", "--platform", "linux/amd64", "--network", "none", "--name", name,

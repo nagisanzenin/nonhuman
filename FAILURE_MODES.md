@@ -4,7 +4,7 @@ nonhuman only removes things. Each rule can therefore break a result only in a f
 
 | rule | how it could break a correct result | guard in SKILL.md |
 |---|---|---|
-| Fewer calls: batch, read once | missing context from skipped exploration | merge steps, never skip them; locate first, then read what is needed |
+| Fewer calls: batch, read once | missing context from skipped exploration | independent calls are merged into one turn, not dropped; "Locate first (grep or the failing test), then read only the needed line ranges" |
 | Fewer calls: verify once | stopping before every requirement is met | requirement check against the diff before the final reply (no extra call) |
 | Fewer calls: stop when done | an uncovered caller, variant or file | the same requirement check; "cover every case each requirement names" |
 | Less output: smallest diff | doing less than the spec ("smallest behaviour") | "smallest diff never means smallest behaviour" |

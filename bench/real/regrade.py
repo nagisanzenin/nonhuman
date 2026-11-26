@@ -1,7 +1,7 @@
-"""Re-grade saved patches (eval/<task>/patches.json) with per-run workspaces. usage: regrade.py TASK -> results/grades_v2.jsonl"""
+"""Re-grade saved patches (eval/<task>/patches.json) with per-run workspaces. usage: python3 bench/real/regrade.py TASK -> runs/grades_v2.jsonl"""
 import json, os, re, shutil, subprocess, sys
-R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TASKS = {t["short"]: t for t in json.load(open(os.path.join(R, "tasks.json")))}
+R = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repository root
+TASKS = {t["short"]: t for t in json.load(open(os.path.join(R, "data", "tasks.json")))}
 for short in sys.argv[1:]:
     t = TASKS[short]; src = os.path.join(R, "eval", short); out = os.path.join(R, "eval_v2", short)
     shutil.rmtree(out, ignore_errors=True); os.makedirs(out)
@@ -10,12 +10,12 @@ for short in sys.argv[1:]:
         P.append({"instance_id": t["instance_id"], "patch": t["patch"], "prefix": "gold_r0"})
     json.dump(P, open(os.path.join(out, "patches.json"), "w"))
     shutil.copy(os.path.join(src, "sample.csv"), out)
-    subprocess.run([os.path.join(R, ".venv", "bin", "python"), "swe_bench_pro_eval.py", f"--raw_sample_path={out}/sample.csv",
+    subprocess.run([sys.executable, "swe_bench_pro_eval.py", f"--raw_sample_path={out}/sample.csv",
                     f"--patch_path={out}/patches.json", f"--output_dir={out}", "--scripts_dir=run_scripts", "--dockerhub_username=jefzda",
                     "--use_local_docker", "--docker_platform=linux/amd64", "--num_workers=3"], cwd=os.path.join(R, "data", "pro-os"),
                    capture_output=True)
     f2p, p2p = (set(json.loads(t[k])) for k in ("fail_to_pass", "pass_to_pass"))
-    with open(os.path.join(R, "results", "grades_v2.jsonl"), "a") as g:
+    with open(os.path.join(R, "runs", "grades_v2.jsonl"), "a") as g:
         for pt in P:
             d = os.path.join(out, t["instance_id"]); o = os.path.join(d, f"{pt['prefix']}_output.json")
             st = {x["name"]: x["status"] for x in json.load(open(o))["tests"]} if os.path.exists(o) else {}

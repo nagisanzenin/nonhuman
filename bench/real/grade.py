@@ -1,10 +1,10 @@
 """Collect each run's diff from its container and grade it with the official SWE-Bench Pro evaluator.
-usage: .venv/bin/python bench/grade.py TASK      -> results/grades.jsonl (one line per run)
+usage: python3 bench/real/grade.py TASK      -> runs/grades.jsonl (one line per run; needs pandas)
 Agent edits to files that the hidden test patch touches are dropped (the test patch must apply cleanly)."""
 import csv, json, os, re, subprocess, sys
 import pandas as pd
-R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TASKS = {t["short"]: t for t in json.load(open(os.path.join(R, "tasks.json")))}
+R = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repository root
+TASKS = {t["short"]: t for t in json.load(open(os.path.join(R, "data", "tasks.json")))}
 
 
 def split_diff(p):
@@ -31,12 +31,12 @@ def grade(short):
     patches.append({"instance_id": t["instance_id"], "patch": t["patch"], "prefix": "gold_r0"})  # control: reference fix
     json.dump(patches, open(os.path.join(out, "patches.json"), "w"))
     pd.DataFrame([{k: v for k, v in t.items() if k != "short"}]).to_csv(os.path.join(out, "sample.csv"), index=False)
-    subprocess.run([os.path.join(R, ".venv", "bin", "python"), "swe_bench_pro_eval.py", f"--raw_sample_path={out}/sample.csv",
+    subprocess.run([sys.executable, "swe_bench_pro_eval.py", f"--raw_sample_path={out}/sample.csv",
                     f"--patch_path={out}/patches.json", f"--output_dir={out}", "--scripts_dir=run_scripts",
                     "--dockerhub_username=jefzda", "--use_local_docker", "--docker_platform=linux/amd64", "--num_workers=3"],
                    cwd=os.path.join(R, "data", "pro-os"))
     f2p, p2p = (set(json.loads(t[k]) if isinstance(t[k], str) else t[k]) for k in ("fail_to_pass", "pass_to_pass"))
-    with open(os.path.join(R, "results", "grades.jsonl"), "a") as g:
+    with open(os.path.join(R, "runs", "grades.jsonl"), "a") as g:
         for pt in patches:
             o = os.path.join(out, t["instance_id"], f"{pt['prefix']}_output.json")
             st = {x["name"]: x["status"] for x in json.load(open(o))["tests"]} if os.path.exists(o) else {}

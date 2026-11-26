@@ -13,7 +13,7 @@ Code written by agents is increasingly read only by agents. Comments, padding, n
 
 ## Math
 
-An agent run is N model calls. Each call re-reads the fixed prefix P and everything appended so far (Δᵢ = tool results + own output), then emits visible output oᵢ and thinking hᵢ. With Claude Opus 5.5 list prices relative to base input (cache write 1.25, cache read 0.05, output 5):
+An agent run is N model calls. Each call re-reads the fixed prefix P and everything appended so far (Δᵢ = tool results + its own output and thinking, which all stay in context), then emits visible output oᵢ and thinking hᵢ. With Claude Opus 5.5 list prices relative to base input (cache write 1.25, cache read 0.05, output 5):
 
 ```
 C = P·(1.25u + 0.05N)  +  Σᵢ Δᵢ·(1.25 + 0.05(N − i))  +  5·Σᵢ (oᵢ + hᵢ)          E[C_task] = C / p_success
@@ -27,6 +27,7 @@ The decomposition is accounting, not a fit: on 84 runs (830 billed calls) it mat
 | one extra call | ≈ 13.4k units, 6.7% of an average run · corr(N, C) = 0.63 |
 | an average call after the first | ≈ 13.3k units: re-read 3.7k · new context 3.7k · visible output 3.7k · thinking 2.2k |
 | cost split (no skill) | prefix 32% · context growth 30% · visible output 25% · thinking 13% |
+| one output or thinking token | ≈ 6.5 units end to end: 5 to write it, 1.25 to cache it, 0.05 for each later call that re-reads it |
 | ceiling of "write terser code" | the code is part of the visible output, a quarter of the bill |
 
 (Pricing note: these numbers use Opus 5.5's 5% cache read. Versions of this README before 2026-11-25 used the older 10% weight, which gave −20% instead of −18%.)
@@ -59,13 +60,13 @@ Full text: [`skills/nonhuman/SKILL.md`](skills/nonhuman/SKILL.md). Each rule's p
 
 | 16 held-out tasks, Opus, n=1 per arm | no skill | Ponytail | nonhuman v1.2 |
 |---|---|---|---|
-| billed cost at Opus 5.5 list prices (95% CI over tasks) | 1.00× | 0.96× (0.89–1.04) | **0.82× (0.76–0.88)** |
+| billed cost at Opus 5.5 list prices (95% CI over tasks) | 1.00× | 0.96× (0.89–1.05) | **0.82× (0.76–0.88)** |
 | model calls per run | 13.7 | 14.8 | **11.2** |
 | resolved (hidden FAIL_TO_PASS + PASS_TO_PASS) | 16/16 | 16/16 | **16/16** |
 
 - **Tasks:** every Python instance of the [SWE-Bench Pro](https://arxiv.org/abs/2509.16941) public `hard` split not used during development (ansible ×6, openlibrary ×6, qutebrowser ×4), each a real multi-file issue.
 - **Protocol:** criteria, task list and skill hash were [pre-registered](results/real/PREREG.md) before the first run: cost ≤ 0.95×, at most 2 more lost than won discordant pairs. Both passed (0 discordant pairs).
-- **Harness:** one task per session, each run in its own no-network container built from the official instance image, with hidden tests removed. Grading uses the official evaluator, the gold patch as a control on every task, and [three documented fixes](bench/real/EVALUATOR_PATCH.md) (including a race in its local-Docker mode). Code and raw data: [`bench/real/`](bench/real/), [`results/real/`](results/real/). Reproduce: clone `scaleapi/SWE-bench_Pro-os` into `data/pro-os`, apply the evaluator changes, then `bench/real/prep.py TASK ARM RUN` → run your agent on `PROMPT.md` → `bench/real/grade.py TASK` → `bench/real/billed.py`.
+- **Harness:** one task per session, each run in its own no-network container built from the official instance image, with hidden tests removed. Grading uses the official evaluator, the gold patch as a control on every task, and [three documented fixes](bench/real/EVALUATOR_PATCH.md) (including a race in its local-Docker mode). Raw data: [`results/real/`](results/real/README.md). **Check the table:** `python3 scripts/verify.py` recomputes it, the interval and the pre-registered criteria from the published files, standard library only. Re-run the benchmark: [`bench/real/README.md`](bench/real/README.md).
 - **How v1.2 came about:** a 4-task pilot of v1.1 cost 0.84× but lost 2 runs that no skill won. Both losses traced to terseness leaking into the contract: a renamed identifier and an incomplete cleanup. v1.2 adds one principle against that whole class, not a patch per task, and was then tested only on tasks it had never seen.
 
 ### Controlled fixtures (secondary)

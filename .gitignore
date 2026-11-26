@@ -1,4 +1,8 @@
 bench/runs/
+/data/
+/runs/
+/eval/
+/eval_v2/
 __pycache__/
 .venv/
 target/
