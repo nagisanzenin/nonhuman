@@ -111,7 +111,7 @@ def hero(T):
         ("Claude Opus 5.5", "Claude Code · pre-registered", OPUS, T["s"][0], "0.76–0.88"),
         ("Gemini 4 Neon XHigh", "Antigravity CLI · generalisation", NEON, T["s"][2], "0.72–0.81"),
     ]
-    w, h, gap = 760, 148, 16
+    w, h, gap = 820, 150, 16
     cw = (w - gap) / 2
     b = ""
     for i, (title, sub, D, accent, ci) in enumerate(cards):
@@ -121,25 +121,25 @@ def hero(T):
         b += text(x + 29, 31, title, T["t1"], 13.5, 650)
         b += text(x + cw - 18, 30, sub, T["t3"], 11, 400, "end")
         pct = f"−{(1 - D['rel']['nonhuman']) * 100:.0f}%"
-        b += text(x + 18, 76, pct, T["t1"], 36, 700)
-        b += text(x + 116, 61, "billed cost vs no skill", T["t2"], 13, 500)
-        b += text(x + 116, 77, f"{D['rel']['nonhuman']:.2f}× (95% CI {ci}) · Ponytail {D['rel']['ponytail']:.2f}×", T["t3"], 11.5)
-        b += f'<line x1="{x+18:.1f}" y1="94" x2="{x+cw-18:.1f}" y2="94" stroke="{T["grid"]}" stroke-width="1"/>'
+        b += text(x + 18, 76, pct, T["t1"], 34, 700)
+        b += text(x + 134, 61, "billed cost vs no skill", T["t2"], 13, 500)
+        b += text(x + 134, 77, f"{D['rel']['nonhuman']:.2f}× (95% CI {ci}) · Ponytail {D['rel']['ponytail']:.2f}×", T["t3"], 11.5)
+        b += f'<line x1="{x+18:.1f}" y1="95" x2="{x+cw-18:.1f}" y2="95" stroke="{T["grid"]}" stroke-width="1"/>'
         cols = [
             (f"{D['resolved']['nonhuman']}/{len(D['valid'])}", "tasks resolved"),
             (f"{D['calls']['baseline']:.1f} → {D['calls']['nonhuman']:.1f}", "calls / run"),
             (f"{D['cheaper']['nonhuman']}/{len(D['valid'])}", "tasks cheaper"),
         ]
-        xs = [x + 18, x + 132, x + 258]
+        xs = [x + 18, x + 144, x + 280]
         for cx, (val, lab) in zip(xs, cols):
-            b += text(cx, 117, val, T["t1"], 14, 650)
-            b += text(cx, 133, lab, T["t3"], 11)
+            b += text(cx, 118, val, T["t1"], 14, 650)
+            b += text(cx, 134, lab, T["t3"], 11)
     return svg(w, h, b, "nonhuman headline results on Claude Opus 5.5 and Gemini 4 Neon XHigh")
 
 
 def anatomy(T):
     keys = [("prefix", "Prefix re-read"), ("growth", "Context growth"), ("output", "Visible output"), ("thinking", "Thinking")]
-    w, left, right, bh, band = 760, 92, 168, 20, 32
+    w, left, right, bh, band = 820, 96, 198, 20, 32
     bar_w = w - left - right
     h = 338
     b = text(0, 18, "Where the bill goes (per run, normalised to each model's No skill = 100%)", T["t1"], 15, 600)
@@ -148,7 +148,7 @@ def anatomy(T):
     for i, (_, lab) in enumerate(keys):
         b += f'<rect x="{lx:.1f}" y="52" width="10" height="10" rx="2" fill="{T["s"][i]}"/>'
         b += text(lx + 15, 61, lab, T["t2"], 12)
-        lx += 15 + len(lab) * 6.8 + 22
+        lx += 15 + len(lab) * 7.4 + 26
 
     panels = [
         (88, "Claude Opus 5.5", "Claude Code · 1 / 1.25 cw / 0.05 cr / 5 out", OPUS, T["s"][0]),
@@ -157,26 +157,26 @@ def anatomy(T):
     for y0, title, sub, D, accent in panels:
         b += f'<rect x="0" y="{y0-10}" width="4" height="13" rx="2" fill="{accent}"/>'
         b += text(11, y0 + 1, title, T["t1"], 13, 650)
-        b += text(11 + len(title) * 7.6 + 10, y0 + 1, sub, T["t3"], 11.5)
+        b += text(w - 2, y0 + 1, sub, T["t3"], 11.5, 400, "end")
         totals = {a: sum(D["anat"][a].values()) for a in ARMS}
         sx = bar_w / totals["baseline"]
         for r, a in enumerate(ARMS):
             y = y0 + 14 + r * band
             x = left
             is_nh = a == "nonhuman"
-            b += text(left - 10, y + 14.5, NAME[a], T["t1"] if is_nh else T["t2"], 12.5, 600 if is_nh else 400, "end")
+            b += text(left - 12, y + 14.5, NAME[a], T["t1"] if is_nh else T["t2"], 12.5, 600 if is_nh else 400, "end")
             for i, (k, _) in enumerate(keys):
                 ww = D["anat"][a][k] * sx
                 last = i == len(keys) - 1
                 b += bar(x, y, max(0.0, ww - (0 if last else 1.5)), bh, T["s"][i], 4 if last else 0)
                 x += ww
             delta = f" (−{(1 - D['rel'][a])*100:.0f}%)" if a != "baseline" else ""
-            b += text(x + 8, y + 14.5, f"{totals[a]/1e3:,.0f}k · {D['calls'][a]:.1f} calls{delta}", T["t1"] if is_nh else T["t2"], 11.5, 600 if is_nh else 400)
+            b += text(x + 10, y + 14.5, f"{totals[a]/1e3:,.0f}k · {D['calls'][a]:.1f} calls{delta}", T["t1"] if is_nh else T["t2"], 11.5, 600 if is_nh else 400)
     return svg(w, h, b, "Billed cost decomposition per run on Claude Opus 5.5 and Gemini 4 Neon XHigh")
 
 
 def by_task(T):
-    w = 760
+    w = 820
     bh, band, group_hdr = 7.5, 22, 22
     top = 74
     all_vals = [
@@ -186,7 +186,7 @@ def by_task(T):
         for a in ("nonhuman", "ponytail")
     ]
     xmax = max(1.4, math.ceil(max(all_vals) * 10) / 10 + 0.05)
-    p1_x0, p2_x0, pw = 48, 424, 282
+    p1_x0, p2_x0, pw = 48, 456, 304
     sx = pw / xmax
 
     # Pre-compute row Y positions with repo group headers

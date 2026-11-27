@@ -16,7 +16,7 @@ Agent-written code is increasingly read only by agents. Comments, padding, narra
 An agent run is $N$ model calls. Call 1 pays for the fixed prefix $P$ ($u$ cache-write misses); each subsequent call re-reads $P$ plus every accumulated delta $\Delta_i$ (tool results, edits, prior turns) and emits visible output $o_i$ and thinking $h_i$. In units of one fresh input token (cache write $w_c$, cache read $r_c$, output $w_o$):
 
 $$
-C = \underbrace{P\bigl(w_c u + r_c(N - u)\bigr)}_{\text{prefix re-reads}} + \underbrace{\sum_{i=1}^{N} \Delta_i\bigl(w_c + r_c(N - i)\bigr)}_{\text{context growth}} + \underbrace{w_o \sum_{i=1}^{N} (o_i + h_i)}_{\text{output + thinking}}
+C = \underbrace{P\left(w_c u + r_c(N - u)\right)}_{\text{prefix re-reads}} + \underbrace{\sum_{i=1}^{N} \Delta_i\left(w_c + r_c(N - i)\right)}_{\text{context growth}} + \underbrace{w_o \sum_{i=1}^{N} (o_i + h_i)}_{\text{output + thinking}}
 $$
 
 $$
@@ -27,7 +27,7 @@ Both **Claude Opus 5.5** (`1 / 1.25 cw / 0.05 cr / 5 out`) and **Gemini 4 Neon**
 
 | quantity (48 held-out runs per model) | Claude Opus 5.5 | Gemini 4 Neon XHigh |
 |---|---|---|
-| one extra call · $\operatorname{corr}(N, C)$ | `≈ 13.4k` units (`6.7%` of mean) · `0.63` | `≈ 30.7k` units (`4.0%` of mean) · `0.62` |
+| one extra call · $\mathrm{corr}(N, C)$ | `≈ 13.4k` units (`6.7%` of mean) · `0.63` | `≈ 30.7k` units (`4.0%` of mean) · `0.62` |
 | no-skill bill split (prefix · growth · visible · thinking) | `32%` · `30%` · `25%` · `13%` | `5%` · `38%` · `11%` · `47%` |
 | ceiling of "write terser code" alone | visible output is `25%` of bill | visible output is `11%` of bill |
 
