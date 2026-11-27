@@ -1,11 +1,12 @@
 """Recompute the README's real-repository table from the published files. Standard library only.
 
-usage: python3 scripts/verify.py [--cache-read 0.05] [--tasks] [--runs CSV] [--grades JSONL]
+usage: python3 scripts/verify.py [--cache-read 0.05] [--output-weight 5.0] [--tasks] [--runs CSV] [--grades JSONL]
 
 Reads results/real/billed_runs.csv (token counts per run) and results/real/grades_heldout.jsonl (official-evaluator
 grades). Cost is recomputed from the token columns, never read from the CSV's own `cost` column:
-    cost = in + 1.25*cw + CACHE_READ*cr + 5*out      (units of one fresh input token; `out` includes thinking)
-Claude Opus 5.5 list prices give CACHE_READ = 0.05. Pass --cache-read 0.1 for the weight used before 2026-11-25.
+    cost = in + 1.25*cw + CACHE_READ*cr + OUTPUT_WEIGHT*out   (units of one fresh input token; `out` includes thinking)
+Claude Opus 5.5 list prices give CACHE_READ = 0.05, OUTPUT_WEIGHT = 5.0. Pass --cache-read 0.1 for the older weight,
+or --cache-read 0.1 --output-weight 6.0 for Gemini 4 Neon weights.
 A task counts only if its gold patch resolved (the control) and every arm has one graded run.
 The interval is a percentile bootstrap over tasks (10,000 resamples, seed 0) of the ratio of summed costs.
 Exits 1 if a pre-registered criterion (results/real/PREREG.md) fails.
@@ -18,6 +19,7 @@ ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDe
 ap.add_argument("--runs", default=os.path.join(ROOT, "results", "real", "billed_runs.csv"))
 ap.add_argument("--grades", default=os.path.join(ROOT, "results", "real", "grades_heldout.jsonl"))
 ap.add_argument("--cache-read", type=float, default=0.05)
+ap.add_argument("--output-weight", type=float, default=5.0)
 ap.add_argument("--tasks", action="store_true", help="also print one row per task")
 a = ap.parse_args()
 
@@ -28,7 +30,7 @@ for line in open(a.grades):
         G[(g["task"], g["arm"])] = g
 B = {}
 for r in csv.DictReader(open(a.runs)):
-    r["cost"] = float(r["in"]) + 1.25 * float(r["cw"]) + a.cache_read * float(r["cr"]) + 5 * float(r["out"])
+    r["cost"] = float(r["in"]) + 1.25 * float(r["cw"]) + a.cache_read * float(r["cr"]) + a.output_weight * float(r["out"])
     B.setdefault((r["task"], r["arm"]), []).append(r)
 tasks = [t for t in sorted({t for t, _ in G})
          if G.get((t, "gold"), {}).get("resolved") and all((t, x) in G and len(B.get((t, x), [])) == 1 for x in ARMS)]
@@ -43,7 +45,8 @@ for x in ARMS:
     ci[x] = (boots[250], boots[9749])
     res[x] = sum(bool(G[(t, x)]["resolved"]) for t in tasks)
 
-print(f"{len(tasks)} tasks ({tasks[0]}..{tasks[-1]}), n=1 per arm, cache read weight {a.cache_read}\n")
+w_note = f"cache read weight {a.cache_read}" + (f", output weight {a.output_weight}" if a.output_weight != 5.0 else "")
+print(f"{len(tasks)} tasks ({tasks[0]}..{tasks[-1]}), n=1 per arm, {w_note}\n")
 print("| arm | cost vs no skill (95% CI over tasks) | calls per run | resolved | cheaper than no skill on |")
 print("|---|---|---|---|---|")
 for x in ARMS:

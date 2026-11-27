@@ -1,0 +1,1808 @@
+[
+  {
+    "lang": "py",
+    "arm": "baseline",
+    "run": "r1",
+    "func_pass": 50,
+    "func_total": 50,
+    "sec_pass": 42,
+    "sec_total": 42,
+    "added_tok": 10103,
+    "tasks": {
+      "t1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 1136
+      },
+      "t2": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 1267
+      },
+      "t3": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 1077
+      },
+      "t4": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 990
+      },
+      "t5": {
+        "func": [
+          9,
+          9
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 2466
+      },
+      "t6": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 1023
+      },
+      "t7": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 1427
+      },
+      "t8": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 717
+      }
+    }
+  },
+  {
+    "lang": "py",
+    "arm": "baseline",
+    "run": "r2",
+    "func_pass": 50,
+    "func_total": 50,
+    "sec_pass": 42,
+    "sec_total": 42,
+    "added_tok": 8559,
+    "tasks": {
+      "t1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 927
+      },
+      "t2": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 873
+      },
+      "t3": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 871
+      },
+      "t4": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 912
+      },
+      "t5": {
+        "func": [
+          9,
+          9
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 1933
+      },
+      "t6": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 1000
+      },
+      "t7": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 1278
+      },
+      "t8": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 765
+      }
+    }
+  },
+  {
+    "lang": "py",
+    "arm": "baseline",
+    "run": "r3",
+    "func_pass": 50,
+    "func_total": 50,
+    "sec_pass": 42,
+    "sec_total": 42,
+    "added_tok": 8192,
+    "tasks": {
+      "t1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 1041
+      },
+      "t2": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 820
+      },
+      "t3": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 787
+      },
+      "t4": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 769
+      },
+      "t5": {
+        "func": [
+          9,
+          9
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 2128
+      },
+      "t6": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 946
+      },
+      "t7": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 1129
+      },
+      "t8": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 572
+      }
+    }
+  },
+  {
+    "lang": "py",
+    "arm": "nonhuman",
+    "run": "r1",
+    "func_pass": 50,
+    "func_total": 50,
+    "sec_pass": 42,
+    "sec_total": 42,
+    "added_tok": 5759,
+    "tasks": {
+      "t1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 451
+      },
+      "t2": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 549
+      },
+      "t3": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 603
+      },
+      "t4": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 540
+      },
+      "t5": {
+        "func": [
+          9,
+          9
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 1537
+      },
+      "t6": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 671
+      },
+      "t7": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 959
+      },
+      "t8": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 449
+      }
+    }
+  },
+  {
+    "lang": "py",
+    "arm": "nonhuman",
+    "run": "r2",
+    "func_pass": 50,
+    "func_total": 50,
+    "sec_pass": 42,
+    "sec_total": 42,
+    "added_tok": 5736,
+    "tasks": {
+      "t1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 500
+      },
+      "t2": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 568
+      },
+      "t3": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 621
+      },
+      "t4": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 580
+      },
+      "t5": {
+        "func": [
+          9,
+          9
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 1581
+      },
+      "t6": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 597
+      },
+      "t7": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 834
+      },
+      "t8": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 455
+      }
+    }
+  },
+  {
+    "lang": "py",
+    "arm": "nonhuman",
+    "run": "r3",
+    "func_pass": 50,
+    "func_total": 50,
+    "sec_pass": 42,
+    "sec_total": 42,
+    "added_tok": 5818,
+    "tasks": {
+      "t1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 476
+      },
+      "t2": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 628
+      },
+      "t3": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 639
+      },
+      "t4": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 568
+      },
+      "t5": {
+        "func": [
+          9,
+          9
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 1512
+      },
+      "t6": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 609
+      },
+      "t7": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 899
+      },
+      "t8": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 487
+      }
+    }
+  },
+  {
+    "lang": "ts",
+    "arm": "baseline",
+    "run": "r1",
+    "func_pass": 26,
+    "func_total": 29,
+    "sec_pass": 32,
+    "sec_total": 33,
+    "added_tok": 8774,
+    "tasks": {
+      "s1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          8,
+          8
+        ],
+        "added_tok": 2192
+      },
+      "s2": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          7
+        ],
+        "added_tok": 1610
+      },
+      "s3": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 1567
+      },
+      "s4": {
+        "func": [
+          3,
+          5
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 1935
+      },
+      "s5": {
+        "func": [
+          4,
+          5
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 1470
+      }
+    }
+  },
+  {
+    "lang": "ts",
+    "arm": "baseline",
+    "run": "r2",
+    "func_pass": 26,
+    "func_total": 29,
+    "sec_pass": 32,
+    "sec_total": 33,
+    "added_tok": 8491,
+    "tasks": {
+      "s1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          8,
+          8
+        ],
+        "added_tok": 2116
+      },
+      "s2": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          7
+        ],
+        "added_tok": 1639
+      },
+      "s3": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 1525
+      },
+      "s4": {
+        "func": [
+          3,
+          5
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 1860
+      },
+      "s5": {
+        "func": [
+          4,
+          5
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 1351
+      }
+    }
+  },
+  {
+    "lang": "ts",
+    "arm": "baseline",
+    "run": "r3",
+    "func_pass": 26,
+    "func_total": 29,
+    "sec_pass": 32,
+    "sec_total": 33,
+    "added_tok": 9006,
+    "tasks": {
+      "s1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          8,
+          8
+        ],
+        "added_tok": 2206
+      },
+      "s2": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          7
+        ],
+        "added_tok": 1557
+      },
+      "s3": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 1812
+      },
+      "s4": {
+        "func": [
+          3,
+          5
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 2030
+      },
+      "s5": {
+        "func": [
+          4,
+          5
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 1401
+      }
+    }
+  },
+  {
+    "lang": "ts",
+    "arm": "nonhuman",
+    "run": "r1",
+    "func_pass": 26,
+    "func_total": 29,
+    "sec_pass": 32,
+    "sec_total": 33,
+    "added_tok": 4819,
+    "tasks": {
+      "s1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          8,
+          8
+        ],
+        "added_tok": 1173
+      },
+      "s2": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          7
+        ],
+        "added_tok": 864
+      },
+      "s3": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 908
+      },
+      "s4": {
+        "func": [
+          3,
+          5
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 1076
+      },
+      "s5": {
+        "func": [
+          4,
+          5
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 798
+      }
+    }
+  },
+  {
+    "lang": "ts",
+    "arm": "nonhuman",
+    "run": "r2",
+    "func_pass": 26,
+    "func_total": 29,
+    "sec_pass": 32,
+    "sec_total": 33,
+    "added_tok": 5310,
+    "tasks": {
+      "s1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          8,
+          8
+        ],
+        "added_tok": 1362
+      },
+      "s2": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          7
+        ],
+        "added_tok": 959
+      },
+      "s3": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 934
+      },
+      "s4": {
+        "func": [
+          3,
+          5
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 1179
+      },
+      "s5": {
+        "func": [
+          4,
+          5
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 876
+      }
+    }
+  },
+  {
+    "lang": "ts",
+    "arm": "nonhuman",
+    "run": "r3",
+    "func_pass": 26,
+    "func_total": 29,
+    "sec_pass": 32,
+    "sec_total": 33,
+    "added_tok": 4705,
+    "tasks": {
+      "s1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          8,
+          8
+        ],
+        "added_tok": 1152
+      },
+      "s2": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          7
+        ],
+        "added_tok": 789
+      },
+      "s3": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 881
+      },
+      "s4": {
+        "func": [
+          3,
+          5
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 1148
+      },
+      "s5": {
+        "func": [
+          4,
+          5
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 735
+      }
+    }
+  },
+  {
+    "lang": "rs",
+    "arm": "baseline",
+    "run": "r1",
+    "func_pass": 31,
+    "func_total": 31,
+    "sec_pass": 30,
+    "sec_total": 30,
+    "added_tok": 9349,
+    "tasks": {
+      "r1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 1504
+      },
+      "r2": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 2767
+      },
+      "r3": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 1435
+      },
+      "r4": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 1846
+      },
+      "r5": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          8,
+          8
+        ],
+        "added_tok": 1797
+      }
+    }
+  },
+  {
+    "lang": "rs",
+    "arm": "baseline",
+    "run": "r2",
+    "func_pass": 31,
+    "func_total": 31,
+    "sec_pass": 30,
+    "sec_total": 30,
+    "added_tok": 11098,
+    "tasks": {
+      "r1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 1655
+      },
+      "r2": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 3564
+      },
+      "r3": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 1916
+      },
+      "r4": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 1998
+      },
+      "r5": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          8,
+          8
+        ],
+        "added_tok": 1965
+      }
+    }
+  },
+  {
+    "lang": "rs",
+    "arm": "baseline",
+    "run": "r3",
+    "func_pass": 31,
+    "func_total": 31,
+    "sec_pass": 30,
+    "sec_total": 30,
+    "added_tok": 10162,
+    "tasks": {
+      "r1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 1644
+      },
+      "r2": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 2952
+      },
+      "r3": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 1614
+      },
+      "r4": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 1787
+      },
+      "r5": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          8,
+          8
+        ],
+        "added_tok": 2165
+      }
+    }
+  },
+  {
+    "lang": "rs",
+    "arm": "nonhuman",
+    "run": "r1",
+    "func_pass": 31,
+    "func_total": 31,
+    "sec_pass": 30,
+    "sec_total": 30,
+    "added_tok": 5501,
+    "tasks": {
+      "r1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 902
+      },
+      "r2": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 1736
+      },
+      "r3": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 865
+      },
+      "r4": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 1052
+      },
+      "r5": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          8,
+          8
+        ],
+        "added_tok": 946
+      }
+    }
+  },
+  {
+    "lang": "rs",
+    "arm": "nonhuman",
+    "run": "r2",
+    "func_pass": 31,
+    "func_total": 31,
+    "sec_pass": 30,
+    "sec_total": 30,
+    "added_tok": 5735,
+    "tasks": {
+      "r1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 924
+      },
+      "r2": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 1664
+      },
+      "r3": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 977
+      },
+      "r4": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 1140
+      },
+      "r5": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          8,
+          8
+        ],
+        "added_tok": 1030
+      }
+    }
+  },
+  {
+    "lang": "rs",
+    "arm": "nonhuman",
+    "run": "r3",
+    "func_pass": 31,
+    "func_total": 31,
+    "sec_pass": 30,
+    "sec_total": 30,
+    "added_tok": 5530,
+    "tasks": {
+      "r1": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          4,
+          4
+        ],
+        "added_tok": 914
+      },
+      "r2": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          5,
+          5
+        ],
+        "added_tok": 1715
+      },
+      "r3": {
+        "func": [
+          6,
+          6
+        ],
+        "sec": [
+          6,
+          6
+        ],
+        "added_tok": 912
+      },
+      "r4": {
+        "func": [
+          7,
+          7
+        ],
+        "sec": [
+          7,
+          7
+        ],
+        "added_tok": 1084
+      },
+      "r5": {
+        "func": [
+          5,
+          5
+        ],
+        "sec": [
+          8,
+          8
+        ],
+        "added_tok": 905
+      }
+    }
+  },
+  {
+    "lang": "c",
+    "arm": "baseline",
+    "run": "r1",
+    "func_pass": 60,
+    "func_total": 60,
+    "sec_pass": 67,
+    "sec_total": 67,
+    "added_tok": 9255,
+    "tasks": {
+      "c1": {
+        "func": [
+          11,
+          11
+        ],
+        "sec": [
+          18,
+          18
+        ],
+        "added_tok": 1480
+      },
+      "c2": {
+        "func": [
+          14,
+          14
+        ],
+        "sec": [
+          14,
+          14
+        ],
+        "added_tok": 3734
+      },
+      "c3": {
+        "func": [
+          11,
+          11
+        ],
+        "sec": [
+          11,
+          11
+        ],
+        "added_tok": 1288
+      },
+      "c4": {
+        "func": [
+          10,
+          10
+        ],
+        "sec": [
+          9,
+          9
+        ],
+        "added_tok": 1447
+      },
+      "c5": {
+        "func": [
+          14,
+          14
+        ],
+        "sec": [
+          15,
+          15
+        ],
+        "added_tok": 1306
+      }
+    }
+  },
+  {
+    "lang": "c",
+    "arm": "baseline",
+    "run": "r2",
+    "func_pass": 60,
+    "func_total": 60,
+    "sec_pass": 67,
+    "sec_total": 67,
+    "added_tok": 9821,
+    "tasks": {
+      "c1": {
+        "func": [
+          11,
+          11
+        ],
+        "sec": [
+          18,
+          18
+        ],
+        "added_tok": 1580
+      },
+      "c2": {
+        "func": [
+          14,
+          14
+        ],
+        "sec": [
+          14,
+          14
+        ],
+        "added_tok": 3934
+      },
+      "c3": {
+        "func": [
+          11,
+          11
+        ],
+        "sec": [
+          11,
+          11
+        ],
+        "added_tok": 1275
+      },
+      "c4": {
+        "func": [
+          10,
+          10
+        ],
+        "sec": [
+          9,
+          9
+        ],
+        "added_tok": 1484
+      },
+      "c5": {
+        "func": [
+          14,
+          14
+        ],
+        "sec": [
+          15,
+          15
+        ],
+        "added_tok": 1548
+      }
+    }
+  },
+  {
+    "lang": "c",
+    "arm": "baseline",
+    "run": "r3",
+    "func_pass": 60,
+    "func_total": 60,
+    "sec_pass": 67,
+    "sec_total": 67,
+    "added_tok": 4570,
+    "tasks": {
+      "c1": {
+        "func": [
+          11,
+          11
+        ],
+        "sec": [
+          18,
+          18
+        ],
+        "added_tok": 423
+      },
+      "c2": {
+        "func": [
+          14,
+          14
+        ],
+        "sec": [
+          14,
+          14
+        ],
+        "added_tok": 2077
+      },
+      "c3": {
+        "func": [
+          11,
+          11
+        ],
+        "sec": [
+          11,
+          11
+        ],
+        "added_tok": 614
+      },
+      "c4": {
+        "func": [
+          10,
+          10
+        ],
+        "sec": [
+          9,
+          9
+        ],
+        "added_tok": 916
+      },
+      "c5": {
+        "func": [
+          14,
+          14
+        ],
+        "sec": [
+          15,
+          15
+        ],
+        "added_tok": 540
+      }
+    }
+  },
+  {
+    "lang": "c",
+    "arm": "nonhuman",
+    "run": "r1",
+    "func_pass": 60,
+    "func_total": 60,
+    "sec_pass": 67,
+    "sec_total": 67,
+    "added_tok": 6141,
+    "tasks": {
+      "c1": {
+        "func": [
+          11,
+          11
+        ],
+        "sec": [
+          18,
+          18
+        ],
+        "added_tok": 890
+      },
+      "c2": {
+        "func": [
+          14,
+          14
+        ],
+        "sec": [
+          14,
+          14
+        ],
+        "added_tok": 2466
+      },
+      "c3": {
+        "func": [
+          11,
+          11
+        ],
+        "sec": [
+          11,
+          11
+        ],
+        "added_tok": 884
+      },
+      "c4": {
+        "func": [
+          10,
+          10
+        ],
+        "sec": [
+          9,
+          9
+        ],
+        "added_tok": 1039
+      },
+      "c5": {
+        "func": [
+          14,
+          14
+        ],
+        "sec": [
+          15,
+          15
+        ],
+        "added_tok": 862
+      }
+    }
+  },
+  {
+    "lang": "c",
+    "arm": "nonhuman",
+    "run": "r2",
+    "func_pass": 60,
+    "func_total": 60,
+    "sec_pass": 67,
+    "sec_total": 67,
+    "added_tok": 6838,
+    "tasks": {
+      "c1": {
+        "func": [
+          11,
+          11
+        ],
+        "sec": [
+          18,
+          18
+        ],
+        "added_tok": 946
+      },
+      "c2": {
+        "func": [
+          14,
+          14
+        ],
+        "sec": [
+          14,
+          14
+        ],
+        "added_tok": 2884
+      },
+      "c3": {
+        "func": [
+          11,
+          11
+        ],
+        "sec": [
+          11,
+          11
+        ],
+        "added_tok": 1010
+      },
+      "c4": {
+        "func": [
+          10,
+          10
+        ],
+        "sec": [
+          9,
+          9
+        ],
+        "added_tok": 1068
+      },
+      "c5": {
+        "func": [
+          14,
+          14
+        ],
+        "sec": [
+          15,
+          15
+        ],
+        "added_tok": 930
+      }
+    }
+  },
+  {
+    "lang": "c",
+    "arm": "nonhuman",
+    "run": "r3",
+    "func_pass": 60,
+    "func_total": 60,
+    "sec_pass": 67,
+    "sec_total": 67,
+    "added_tok": 6160,
+    "tasks": {
+      "c1": {
+        "func": [
+          11,
+          11
+        ],
+        "sec": [
+          18,
+          18
+        ],
+        "added_tok": 906
+      },
+      "c2": {
+        "func": [
+          14,
+          14
+        ],
+        "sec": [
+          14,
+          14
+        ],
+        "added_tok": 2379
+      },
+      "c3": {
+        "func": [
+          11,
+          11
+        ],
+        "sec": [
+          11,
+          11
+        ],
+        "added_tok": 952
+      },
+      "c4": {
+        "func": [
+          10,
+          10
+        ],
+        "sec": [
+          9,
+          9
+        ],
+        "added_tok": 999
+      },
+      "c5": {
+        "func": [
+          14,
+          14
+        ],
+        "sec": [
+          15,
+          15
+        ],
+        "added_tok": 924
+      }
+    }
+  }
+]
