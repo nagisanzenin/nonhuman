@@ -94,8 +94,8 @@ def bar(x0, y, w, h, color, r=4):
     )
 
 
-def text(x, y, s, fill, size=13, weight=400, anchor="start", halo=None):
-    h = f' stroke="{halo}" stroke-width="4" paint-order="stroke" stroke-linejoin="round"' if halo else ""
+def text(x, y, s, fill, size=13, weight=400, anchor="start", halo=None, halo_w=3):
+    h = f' stroke="{halo}" stroke-width="{halo_w}" paint-order="stroke" stroke-linejoin="round"' if halo else ""
     return f'<text x="{x:.1f}" y="{y:.1f}" fill="{fill}" font-size="{size}" font-weight="{weight}" text-anchor="{anchor}"{h}>{s}</text>'
 
 
@@ -111,7 +111,7 @@ def hero(T):
         ("Claude Opus 5.5", "Claude Code · pre-registered", OPUS, T["s"][0], "0.76–0.88"),
         ("Gemini 4 Neon XHigh", "Antigravity CLI · generalisation", NEON, T["s"][2], "0.72–0.81"),
     ]
-    w, h, gap = 820, 150, 16
+    w, h, gap = 840, 150, 16
     cw = (w - gap) / 2
     b = ""
     for i, (title, sub, D, accent, ci) in enumerate(cards):
@@ -122,15 +122,15 @@ def hero(T):
         b += text(x + cw - 18, 30, sub, T["t3"], 11, 400, "end")
         pct = f"−{(1 - D['rel']['nonhuman']) * 100:.0f}%"
         b += text(x + 18, 76, pct, T["t1"], 34, 700)
-        b += text(x + 134, 61, "billed cost vs no skill", T["t2"], 13, 500)
-        b += text(x + 134, 77, f"{D['rel']['nonhuman']:.2f}× (95% CI {ci}) · Ponytail {D['rel']['ponytail']:.2f}×", T["t3"], 11.5)
+        b += text(x + 138, 61, "billed cost vs no skill", T["t2"], 13, 500)
+        b += text(x + 138, 77, f"{D['rel']['nonhuman']:.2f}× (95% CI {ci}) · Ponytail {D['rel']['ponytail']:.2f}×", T["t3"], 11.5)
         b += f'<line x1="{x+18:.1f}" y1="95" x2="{x+cw-18:.1f}" y2="95" stroke="{T["grid"]}" stroke-width="1"/>'
         cols = [
             (f"{D['resolved']['nonhuman']}/{len(D['valid'])}", "tasks resolved"),
             (f"{D['calls']['baseline']:.1f} → {D['calls']['nonhuman']:.1f}", "calls / run"),
             (f"{D['cheaper']['nonhuman']}/{len(D['valid'])}", "tasks cheaper"),
         ]
-        xs = [x + 18, x + 144, x + 280]
+        xs = [x + 18, x + 148, x + 288]
         for cx, (val, lab) in zip(xs, cols):
             b += text(cx, 118, val, T["t1"], 14, 650)
             b += text(cx, 134, lab, T["t3"], 11)
@@ -139,7 +139,7 @@ def hero(T):
 
 def anatomy(T):
     keys = [("prefix", "Prefix re-read"), ("growth", "Context growth"), ("output", "Visible output"), ("thinking", "Thinking")]
-    w, left, right, bh, band = 820, 96, 198, 20, 32
+    w, left, right, bh, band = 840, 96, 204, 20, 32
     bar_w = w - left - right
     h = 338
     b = text(0, 18, "Where the bill goes (per run, normalised to each model's No skill = 100%)", T["t1"], 15, 600)
@@ -176,8 +176,8 @@ def anatomy(T):
 
 
 def by_task(T):
-    w = 820
-    bh, band, group_hdr = 7.5, 22, 22
+    w = 840
+    bh, bgap, band, group_hdr = 8.5, 2.5, 26, 24
     top = 74
     all_vals = [
         D["per_task"][t][a]
@@ -186,7 +186,7 @@ def by_task(T):
         for a in ("nonhuman", "ponytail")
     ]
     xmax = max(1.4, math.ceil(max(all_vals) * 10) / 10 + 0.05)
-    p1_x0, p2_x0, pw = 48, 456, 304
+    p1_x0, p2_x0, pw = 48, 468, 312
     sx = pw / xmax
 
     # Pre-compute row Y positions with repo group headers
@@ -230,19 +230,19 @@ def by_task(T):
 
     for kind, item, y in layout:
         if kind == "group":
-            b += f'<line x1="{p1_x0}" y1="{y+18}" x2="{p1_x0+pw}" y2="{y+18}" stroke="{T["grid"]}" stroke-width="0.7"/>'
-            b += f'<line x1="{p2_x0}" y1="{y+18}" x2="{p2_x0+pw}" y2="{y+18}" stroke="{T["grid"]}" stroke-width="0.7"/>'
-            b += text(2, y + 14, item, T["t3"], 11, 600, halo=T["gap"])
+            b += f'<line x1="{p1_x0}" y1="{y+19}" x2="{p1_x0+pw}" y2="{y+19}" stroke="{T["grid"]}" stroke-width="0.7"/>'
+            b += f'<line x1="{p2_x0}" y1="{y+19}" x2="{p2_x0+pw}" y2="{y+19}" stroke="{T["grid"]}" stroke-width="0.7"/>'
+            b += text(2, y + 14, item, T["t3"], 11, 600, halo=T["gap"], halo_w=3)
         else:
             t = item
-            b += text(p1_x0 - 10, y + bh + 4, t, T["t2"], 11, 500, "end")
+            b += text(p1_x0 - 10, y + bh + bgap / 2 + 3.5, t, T["t2"], 11, 500, "end")
             for px0, _, _, D, _ in panels:
                 v = D["per_task"][t]["nonhuman"]
                 vp = D["per_task"][t]["ponytail"]
                 b += bar(px0, y, v * sx, bh, T["s"][0], 2.5)
-                b += text(px0 + v * sx + 5, y + bh - 0.5, f"{v:.2f}×", T["t1"], 10, 600, halo=T["gap"])
-                b += bar(px0, y + bh + 1.5, vp * sx, bh, T["s"][1], 2.5)
-                b += text(px0 + vp * sx + 5, y + 2 * bh + 1, f"{vp:.2f}×", T["t3"], 9.5, 400, halo=T["gap"])
+                b += text(px0 + v * sx + 5, y + bh - 0.5, f"{v:.2f}×", T["t1"], 10, 600, halo=T["gap"], halo_w=2.5)
+                b += bar(px0, y + bh + bgap, vp * sx, bh, T["s"][1], 2.5)
+                b += text(px0 + vp * sx + 5, y + 2 * bh + bgap - 0.5, f"{vp:.2f}×", T["t3"], 9.5, 400, halo=T["gap"], halo_w=2.5)
     return svg(w, h, b, "Billed cost per held-out task on Claude Opus 5.5 and Gemini 4 Neon XHigh")
 
 

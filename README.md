@@ -27,7 +27,7 @@ Both **Claude Opus 5.5** (`1 / 1.25 cw / 0.05 cr / 5 out`) and **Gemini 4 Neon**
 
 | quantity (48 held-out runs per model) | Claude Opus 5.5 | Gemini 4 Neon XHigh |
 |---|---|---|
-| one extra call · $\mathrm{corr}(N, C)$ | `≈ 13.4k` units (`6.7%` of mean) · `0.63` | `≈ 30.7k` units (`4.0%` of mean) · `0.62` |
+| one extra call · $\text{corr}(N, C)$ | `≈ 13.4k` units (`6.7%` of mean) · `0.63` | `≈ 30.7k` units (`4.0%` of mean) · `0.62` |
 | no-skill bill split (prefix · growth · visible · thinking) | `32%` · `30%` · `25%` · `13%` | `5%` · `38%` · `11%` · `47%` |
 | ceiling of "write terser code" alone | visible output is `25%` of bill | visible output is `11%` of bill |
 
