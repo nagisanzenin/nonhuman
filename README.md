@@ -69,12 +69,12 @@ Full text: [`skills/nonhuman/SKILL.md`](skills/nonhuman/SKILL.md). Each rule's p
 | model (harness) | no skill | Ponytail (95% CI) | nonhuman v1.2 (95% CI) | calls (base → nh) | resolved (base → nh) | data |
 |---|---|---|---|---|---|---|
 | **Claude Opus 5.5** (Claude Code, pre-registered) | 1.00× | 0.96× (0.89–1.05) | **0.82× (0.76–0.88)** | 13.7 → **11.2** | 16/16 → **16/16** | [`results/real/`](results/real/README.md) |
-| **Gemini 4 Neon XHigh** (Antigravity CLI) | 1.00× | 0.87× (0.81–0.91) | **0.74× (0.70–0.79)** *(0.77× Opus weights)* | 28.2 → **20.6** | 16/16 → **16/16** | [`results/real_gemini_neon/`](results/real_gemini_neon/RESULT.md) |
+| **Gemini 4 Neon XHigh** (Antigravity CLI) | 1.00× | 0.88× (0.83–0.92) | **0.77× (0.72–0.81)** | 28.2 → **20.6** | 16/16 → **16/16** | [`results/real_gemini_neon/`](results/real_gemini_neon/RESULT.md) |
 | **DeepSeek V4.1 Flash** (Claude Code `--bare`) | 1.00× | 1.00× (0.89–1.11) | **0.84× (0.70–0.97)** | 52.7 → **39.2** | 14/16 → 12/16 *(h10 0/3 vs 2/3)* | [`results/real_deepseek/`](results/real_deepseek/RESULT.md) |
 
 - **Tasks:** every Python instance of the [SWE-Bench Pro](https://arxiv.org/abs/2509.16941) public `hard` split not used during development (ansible ×6, openlibrary ×6, qutebrowser ×4), each a real multi-file issue.
-- **Protocol:** criteria, task list and skill hash were [pre-registered](results/real/PREREG.md) before the first run: cost ≤ 0.95×, at most 2 more lost than won discordant pairs. Both passed on Opus 5.5 and Gemini 4 Neon XHigh (0 discordant pairs on both; on Gemini 4 Neon XHigh, `nonhuman` also beat Ponytail at 0.86×, 95% CI 0.81–0.91, cheaper on 14/16 tasks).
-- **Harness:** one task per session, each run in its own no-network container built from the official instance image, with hidden tests removed. Grading uses the official evaluator, the gold patch as a control on every task, and [three documented fixes](bench/real/EVALUATOR_PATCH.md) (including a race in its local-Docker mode). Raw data: [`results/real/`](results/real/README.md) (Opus 5.5), [`results/real_gemini_neon/`](results/real_gemini_neon/RESULT.md) (Gemini 4 Neon XHigh), [`results/real_deepseek/`](results/real_deepseek/RESULT.md) (DeepSeek V4.1 Flash). **Check the tables:** `python3 scripts/verify.py` recomputes Opus 5.5 from published files (standard library only); pass `--runs results/real_gemini_neon/billed_runs.csv --grades results/real_gemini_neon/grades_neon.jsonl --cache-read 0.10 --output-weight 6.0` for Gemini 4 Neon XHigh. Re-run the benchmark: [`bench/real/README.md`](bench/real/README.md).
+- **Protocol:** criteria, task list and skill hash were [pre-registered](results/real/PREREG.md) before the first run: cost ≤ 0.95×, at most 2 more lost than won discordant pairs. Both passed on Opus 5.5 and Gemini 4 Neon XHigh (0 discordant pairs on both; on Gemini 4 Neon XHigh, `nonhuman` also beat Ponytail at 0.87×, 95% CI 0.83–0.92, cheaper on 14/16 tasks).
+- **Harness:** one task per session, each run in its own no-network container built from the official instance image, with hidden tests removed. Grading uses the official evaluator, the gold patch as a control on every task, and [three documented fixes](bench/real/EVALUATOR_PATCH.md) (including a race in its local-Docker mode). Raw data: [`results/real/`](results/real/README.md) (Opus 5.5), [`results/real_gemini_neon/`](results/real_gemini_neon/RESULT.md) (Gemini 4 Neon XHigh), [`results/real_deepseek/`](results/real_deepseek/RESULT.md) (DeepSeek V4.1 Flash). **Check the tables:** `python3 scripts/verify.py` recomputes Opus 5.5 from published files (standard library only); pass `--runs results/real_gemini_neon/billed_runs.csv --grades results/real_gemini_neon/grades_neon.jsonl` for Gemini 4 Neon XHigh (official list prices `$3 / $0.15 / $15` per 1M tokens give the same `1 / 0.05 / 5` weights). Re-run the benchmark: [`bench/real/README.md`](bench/real/README.md).
 - **How v1.2 came about:** a 4-task pilot of v1.1 cost 0.84× but lost 2 runs that no skill won. Both losses traced to terseness leaking into the contract: a renamed identifier and an incomplete cleanup. v1.2 adds one principle against that whole class, not a patch per task, and was then tested only on tasks it had never seen.
 
 ### Controlled fixtures (secondary)
@@ -83,11 +83,11 @@ Four purpose-built services (Python, TypeScript, Rust, C) with hidden functional
 
 | | no skill | Ponytail | nonhuman v1.0 | nonhuman v1.2 | Gemini 4 Neon XHigh (v1.2, Antigravity) |
 |---|---|---|---|---|---|
-| billed cost | 1.00× | 1.00× | 0.71× | 0.86× (≈0.78× cache-normalised) | **0.75×** (0.77× Opus weights; 12/12 cheaper) |
+| billed cost | 1.00× | 1.00× | 0.71× | 0.86× (≈0.78× cache-normalised) | **0.77×** (12/12 cheaper) |
 | security tests | 513/516 | 513/516 | 513/516 | 513/516 | **513/516** (vs 513/516 no skill) |
 | functional tests | 499/510 | 498/510 | 498/510 | 498/510 | **501/510** (vs 501/510 no skill) |
 
-v1.2 trades part of v1.0's fixture saving for the requirement check that closed the real-repo losses. All Opus v1.2 runs started with a cold prompt cache (≈+20k units each), which is a harness artifact. Gemini 4 Neon XHigh fixture data: [`results/fixture_gemini_neon/`](results/fixture_gemini_neon/README.md).
+v1.2 trades part of v1.0's fixture saving for the requirement check that closed the real-repo losses. All Opus v1.2 runs started with a cold prompt cache (≈+20k units each), which is a harness artifact. Gemini 4 Neon XHigh fixture data (at official `$3 / $0.15 / $15` list prices): [`results/fixture_gemini_neon/`](results/fixture_gemini_neon/README.md).
 
 ## Install
 
@@ -104,7 +104,7 @@ Claude Code and Antigravity install routes are verified live; other platform rou
 
 ## Limits
 
-- Tested across three models and two harnesses on the same 16 held-out tasks: **Claude Opus 5.5** (Claude Code, pre-registered: 0.82×, 16/16), **Gemini 4 Neon XHigh** (Antigravity CLI: 0.74× Gemini / 0.77× Opus weights, 16/16, [`results/real_gemini_neon/RESULT.md`](results/real_gemini_neon/RESULT.md)), and **DeepSeek V4.1 Flash** (Claude Code `--bare`: 0.84×, 12/16 vs 14/16, [`results/real_deepseek/RESULT.md`](results/real_deepseek/RESULT.md)). DeepSeek lost one task reproducibly (`h10`: 0/3 vs 2/3 for no skill; Ponytail also 0/3), showing that weaker models can drop defensive shape checks under minimal-diff rules.
+- Tested across three models and two harnesses on the same 16 held-out tasks: **Claude Opus 5.5** (Claude Code, pre-registered: 0.82×, 16/16), **Gemini 4 Neon XHigh** (Antigravity CLI: 0.77× at `$3 / $0.15 / $15` list prices, 16/16, [`results/real_gemini_neon/RESULT.md`](results/real_gemini_neon/RESULT.md)), and **DeepSeek V4.1 Flash** (Claude Code `--bare`: 0.84×, 12/16 vs 14/16, [`results/real_deepseek/RESULT.md`](results/real_deepseek/RESULT.md)). DeepSeek lost one task reproducibly (`h10`: 0/3 vs 2/3 for no skill; Ponytail also 0/3), showing that weaker models can drop defensive shape checks under minimal-diff rules.
 - Real-repo tasks are Python only: Go and JS repos hung or ran out of memory under x86 emulation on the test machine, so they are not measured.
 - n=1 per arm per task. Equal resolve rates show no large regression, not parity at the level of a few points.
 - Thinking budget was left at the harness default.

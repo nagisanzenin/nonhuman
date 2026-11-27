@@ -2,50 +2,51 @@
 
 Third model (`gemini-4-neon-xhigh`), second harness (Antigravity CLI), same 16 held-out tasks (`h01`–`h16`), same `nonhuman` v1.2.0 skill text, same Ponytail comparator (`sha256 3868c7aa…f379`), same official SWE-Bench Pro evaluator. Not pre-registered; this is a cross-model and cross-harness generalisation check.
 
+**Official Gemini 4 Neon list prices (flat across 1M context, implicit caching only):** `$3.00` / 1M input (`1×`), `$0.15` / 1M cached input (`0.05×`, 95% off, no cache-write fee), `$15.00` / 1M output including thinking (`5×`).
+
 ## 1. Real repositories (`h01`–`h16`, SWE-Bench Pro)
 
 | 16 tasks, `gemini-4-neon-xhigh`, n=1 per arm | no skill | Ponytail | nonhuman v1.2 |
 |---|---|---|---|
-| cost, Gemini weights `1 / 0.10 cr / 6 out` (95% CI over tasks) | 1.000× | 0.865× (0.815–0.914) | **0.742× (0.696–0.790)** |
-| cost, Anthropic Opus 5.5 weights `1 / 0.05 cr / 5 out` (95% CI) | 1.000× | 0.876× (0.830–0.920) | **0.766× (0.722–0.811)** |
+| billed cost at Gemini 4 Neon list prices (95% CI over tasks) | 1.000× | 0.876× (0.830–0.920) | **0.766× (0.722–0.811)** |
+| implied API cost across 16 tasks (`$3 / $0.15 / $15` per 1M) | $42.20 ($2.64/task) | $36.96 ($2.31/task) | **$32.32 ($2.02/task)** |
 | model calls per run | 28.2 | 24.8 | **20.6** |
 | thinking tokens per run | 83.0k | 74.7k | **67.5k** |
 | wall time per run | 16.2m | 14.6m | **13.8m** |
 | resolved (hidden `FAIL_TO_PASS` + `PASS_TO_PASS`) | 16/16 | 16/16 | **16/16** |
 | discordant pairs vs no skill | — | W0 / L0 | **W0 / L0** |
-| cheaper than no skill on (Gemini / Anthropic weights) | — | 15/16 · 14/16 | **16/16 · 16/16** |
+| cheaper than no skill on | — | 14/16 | **16/16** |
 
-- **Head-to-head `nonhuman` vs Ponytail:** **0.857× (0.810–0.905)** at Gemini weights and **0.874× (0.829–0.922)** at Anthropic weights (`nonhuman` is cheaper than Ponytail on **14/16** tasks).
-- **By repository (Gemini weights):** `ansible/ansible` (n=6) Ponytail `0.858×` / **nonhuman `0.711×`**; `internetarchive/openlibrary` (n=6) Ponytail `0.873×` / **nonhuman `0.785×`**; `qutebrowser/qutebrowser` (n=4) Ponytail `0.863×` / **nonhuman `0.707×`**.
+- **Head-to-head `nonhuman` vs Ponytail:** **0.874× (0.829–0.922)** (`nonhuman` is cheaper than Ponytail on **14/16** tasks).
+- **By repository:** `ansible/ansible` (n=6) Ponytail `0.866×` / **nonhuman `0.729×`**; `internetarchive/openlibrary` (n=6) Ponytail `0.887×` / **nonhuman `0.815×`**; `qutebrowser/qutebrowser` (n=4) Ponytail `0.873×` / **nonhuman `0.734×`**.
 - **Gold control:** resolved on **16/16** tasks. All 48 runs ended cleanly (`SUCCESS`, 0 turn-cap/timeout hits).
-- **`h10` stress test:** on DeepSeek V4.1 Flash, both `nonhuman` and Ponytail lost `h10` reproducibly (`0/3` vs `2/3` for no skill). On Gemini 4 Neon XHigh, all three arms resolved `h10` cleanly (`7/7` `f2p`, `10/10` `p2p`), with `nonhuman` cutting cost to `0.759×` (`17` vs `23` calls).
-- **Where the bill goes on Gemini 4 Neon XHigh (no skill mean: 1,137.3k Gemini units):** output + thinking is `53.6%` (`43.8%` thinking, `9.8%` visible), cache reads `27.5%`, fresh input `18.9%`. `nonhuman` cuts calls by `-27.0%`, cache reads by `-44.8%` (`3.13M → 1.73M`), fresh input by `-21.6%` (`215.1k → 168.7k`), and thinking+visible output by `-17.5%` (`101.5k → 83.7k`).
+- **`h10` stress test:** on DeepSeek V4.1 Flash, both `nonhuman` and Ponytail lost `h10` reproducibly (`0/3` vs `2/3` for no skill). On Gemini 4 Neon XHigh, all three arms resolved `h10` cleanly (`7/7` `f2p`, `10/10` `p2p`), with `nonhuman` cutting cost to `0.792×` (`17` vs `23` calls).
+- **Where the bill goes on Gemini 4 Neon XHigh (no skill mean: 879.3k base-input units = $2.64/run):** output + thinking is `57.7%` (`47.2%` thinking, `10.6%` visible), fresh input `24.5%`, cache reads `17.8%`. `nonhuman` cuts calls by `-27.0%`, cache reads by `-44.8%` (`3.13M → 1.73M`), fresh input by `-21.6%` (`215.1k → 168.7k`), and thinking+visible output by `-17.5%` (`101.5k → 83.7k`).
 - **Verify independently from the published CSV/JSONL:**
   ```bash
-  python3 scripts/verify.py --runs results/real_gemini_neon/billed_runs.csv --grades results/real_gemini_neon/grades_neon.jsonl --cache-read 0.10 --output-weight 6.0 --tasks
-  python3 scripts/verify.py --runs results/real_gemini_neon/billed_runs.csv --grades results/real_gemini_neon/grades_neon.jsonl --cache-read 0.05 --output-weight 5.0
+  python3 scripts/verify.py --runs results/real_gemini_neon/billed_runs.csv --grades results/real_gemini_neon/grades_neon.jsonl --tasks
   ```
 
-### Per-task breakdown (`h01`–`h16`, Gemini weights `1 / 0.10 cr / 6 out`)
+### Per-task breakdown (`h01`–`h16`, Gemini 4 Neon list prices `1 / 0.05 cr / 5 out`)
 
 | task | repo | no skill (k · calls) | Ponytail (k · calls · ratio) | nonhuman (k · calls · ratio) | resolved (`base / pt / nh / gold`) |
 |---|---|---:|---:|---:|---|
-| h01 | ansible | 1,554.5 · 27 | 1,495.8 · 22 · 0.962× | **1,229.9 · 21 · 0.791×** | yes / yes / yes / yes |
-| h02 | ansible | 1,415.5 · 39 | 1,189.6 · 40 · 0.840× | **955.4 · 28 · 0.675×** | yes / yes / yes / yes |
-| h03 | ansible | 751.3 · 14 | 694.7 · 17 · 0.925× | **610.7 · 13 · 0.813×** | yes / yes / yes / yes |
-| h04 | ansible | 1,895.3 · 33 | 1,639.2 · 29 · 0.865× | **1,301.1 · 24 · 0.686×** | yes / yes / yes / yes |
-| h05 | ansible | 1,481.1 · 31 | 1,056.0 · 24 · 0.713× | **946.8 · 23 · 0.639×** | yes / yes / yes / yes |
-| h06 | ansible | 384.6 · 15 | 344.1 · 13 · 0.895× | **278.3 · 11 · 0.724×** | yes / yes / yes / yes |
-| h07 | openlibrary | 1,228.9 · 35 | 953.0 · 22 · 0.776× | **813.7 · 18 · 0.662×** | yes / yes / yes / yes |
-| h08 | openlibrary | 1,526.6 · 34 | **1,088.2 · 23 · 0.713×** | 1,097.6 · 18 · 0.719× | yes / yes / yes / yes |
-| h09 | openlibrary | 1,630.9 · 26 | 1,539.3 · 28 · 0.944× | **1,513.7 · 29 · 0.928×** | yes / yes / yes / yes |
-| h10 | openlibrary | 572.8 · 23 | 563.3 · 21 · 0.983× | **434.9 · 17 · 0.759×** | yes / yes / yes / yes |
-| h11 | openlibrary | 901.9 · 25 | 933.0 · 30 · 1.034× | **714.0 · 20 · 0.792×** | yes / yes / yes / yes |
-| h12 | openlibrary | 1,737.7 · 34 | 1,555.0 · 28 · 0.895× | **1,394.7 · 26 · 0.803×** | yes / yes / yes / yes |
-| h13 | qutebrowser | 1,010.1 · 32 | 1,005.8 · 30 · 0.996× | **706.1 · 23 · 0.699×** | yes / yes / yes / yes |
-| h14 | qutebrowser | 645.3 · 24 | 529.5 · 25 · 0.820× | **376.4 · 15 · 0.583×** | yes / yes / yes / yes |
-| h15 | qutebrowser | 836.0 · 29 | 650.1 · 22 · 0.778× | **556.4 · 21 · 0.666×** | yes / yes / yes / yes |
-| h16 | qutebrowser | 623.8 · 31 | **502.1 · 23 · 0.805×** | 563.4 · 23 · 0.903× | yes / yes / yes / yes |
+| h01 | ansible | 1,237.7 · 27 | 1,207.0 · 22 · 0.975× | **997.3 · 21 · 0.806×** | yes / yes / yes / yes |
+| h02 | ansible | 1,048.0 · 39 | 889.9 · 40 · 0.849× | **733.9 · 28 · 0.700×** | yes / yes / yes / yes |
+| h03 | ansible | 626.6 · 14 | 565.6 · 17 · 0.903× | **504.6 · 13 · 0.805×** | yes / yes / yes / yes |
+| h04 | ansible | 1,473.8 · 33 | 1,276.2 · 29 · 0.866× | **1,034.3 · 24 · 0.702×** | yes / yes / yes / yes |
+| h05 | ansible | 1,126.2 · 31 | 825.1 · 24 · 0.733× | **744.4 · 23 · 0.661×** | yes / yes / yes / yes |
+| h06 | ansible | 310.8 · 15 | 277.4 · 13 · 0.892× | **230.6 · 11 · 0.742×** | yes / yes / yes / yes |
+| h07 | openlibrary | 921.3 · 35 | 751.1 · 22 · 0.815× | **660.7 · 18 · 0.717×** | yes / yes / yes / yes |
+| h08 | openlibrary | 1,163.7 · 34 | **864.6 · 23 · 0.743×** | 896.0 · 18 · 0.770× | yes / yes / yes / yes |
+| h09 | openlibrary | 1,297.9 · 26 | 1,225.7 · 28 · 0.944× | **1,203.2 · 29 · 0.927×** | yes / yes / yes / yes |
+| h10 | openlibrary | 447.0 · 23 | 442.4 · 21 · 0.990× | **354.1 · 17 · 0.792×** | yes / yes / yes / yes |
+| h11 | openlibrary | 702.8 · 25 | 706.4 · 30 · 1.005× | **569.9 · 20 · 0.811×** | yes / yes / yes / yes |
+| h12 | openlibrary | 1,336.6 · 34 | 1,214.2 · 28 · 0.908× | **1,099.7 · 26 · 0.823×** | yes / yes / yes / yes |
+| h13 | qutebrowser | 762.4 · 32 | 765.0 · 30 · 1.003× | **546.5 · 23 · 0.717×** | yes / yes / yes / yes |
+| h14 | qutebrowser | 500.4 · 24 | 406.6 · 25 · 0.812× | **305.3 · 15 · 0.610×** | yes / yes / yes / yes |
+| h15 | qutebrowser | 648.4 · 29 | 516.4 · 22 · 0.796× | **440.5 · 21 · 0.679×** | yes / yes / yes / yes |
+| h16 | qutebrowser | 464.5 · 31 | **386.1 · 23 · 0.831×** | 452.2 · 23 · 0.973× | yes / yes / yes / yes |
 
 ## 2. Controlled fixtures (24 runs: `py, ts, rs, c` × 3 replicates, `baseline` vs `nonhuman`)
 
@@ -53,16 +54,14 @@ Raw files: [`../fixture_gemini_neon/`](../fixture_gemini_neon/README.md). Same 4
 
 | metric (12 runs per arm) | no skill | nonhuman v1.2 | ratio / delta |
 |---|---:|---:|---:|
-| cost, Gemini weights `1 / 0.10 cr / 6 out` (95% CI) | 485.6k/run | **366.1k/run** | **0.754× (0.714–0.799)** · 12/12 cheaper |
-| cost, Anthropic weights `1 / 0.05 cr / 5 out` (95% CI) | 406.0k/run | **311.0k/run** | **0.766× (0.729–0.808)** · 12/12 cheaper |
-| cost, legacy 10% weights `1 / 0.10 cr / 5 out` (95% CI) | 428.1k/run | **322.0k/run** | **0.752× (0.711–0.799)** · 12/12 cheaper |
+| billed cost at Gemini 4 Neon list prices (95% CI) | 406.0k/run ($14.62 tot) | **311.0k/run ($11.20 tot)** | **0.766× (0.729–0.808)** · 12/12 cheaper |
 | model calls per run | 8.9 | **6.1** | **-31.8%** |
 | added code tokens (`o200k_base`) per run | 8,948 | **5,671** | **-36.6%** |
 | wall time per run | 504.7s | **384.0s** | **-23.9%** |
 | hidden security tests | 513/516 | **513/516** | exact tie (`py` 126/126, `ts` 96/99, `rs` 90/90, `c` 201/201) |
 | hidden functional tests | 501/510 | **501/510** | exact tie (`py` 150/150, `ts` 78/87, `rs` 93/93, `c` 180/180) |
 
-Per-language Gemini cost ratios: `py` `0.830×`, `ts` `0.794×`, `rs` `0.731×`, `c` `0.684×`.
+Per-language cost ratios: `py` `0.839×`, `ts` `0.803×`, `rs` `0.744×`, `c` `0.698×`.
 
 ## 3. Harness & Independent Audit
 

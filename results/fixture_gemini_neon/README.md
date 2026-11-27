@@ -4,7 +4,7 @@
 
 | file | content |
 |---|---|
-| `billed_runs.csv` | one row per run (24 rows; `cost` column uses Gemini weights `in + 0.10·cr + 6·out`) |
+| `billed_runs.csv` | one row per run (24 rows; `cost` column uses official Gemini 4 Neon list prices `$3 / $0.15 / $15` per 1M = `in + 0.05·cr + 5·out`) |
 | `billed_calls.csv` | one row per model call parsed from raw `agy --output-format stream-json` logs |
 | `quality.json` | per-run and per-task hidden functional/security test results and `o200k_base` `added_tok` |
 

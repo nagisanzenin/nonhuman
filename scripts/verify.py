@@ -5,8 +5,8 @@ usage: python3 scripts/verify.py [--cache-read 0.05] [--output-weight 5.0] [--ta
 Reads results/real/billed_runs.csv (token counts per run) and results/real/grades_heldout.jsonl (official-evaluator
 grades). Cost is recomputed from the token columns, never read from the CSV's own `cost` column:
     cost = in + 1.25*cw + CACHE_READ*cr + OUTPUT_WEIGHT*out   (units of one fresh input token; `out` includes thinking)
-Claude Opus 5.5 list prices give CACHE_READ = 0.05, OUTPUT_WEIGHT = 5.0. Pass --cache-read 0.1 for the older weight,
-or --cache-read 0.1 --output-weight 6.0 for Gemini 4 Neon weights.
+Claude Opus 5.5 and Gemini 4 Neon ($3 / $0.15 / $15 per 1M) both give CACHE_READ = 0.05, OUTPUT_WEIGHT = 5.0.
+Pass --cache-read 0.1 for the older 10% weight used before 2026-11-25.
 A task counts only if its gold patch resolved (the control) and every arm has one graded run.
 The interval is a percentile bootstrap over tasks (10,000 resamples, seed 0) of the ratio of summed costs.
 Exits 1 if a pre-registered criterion (results/real/PREREG.md) fails.
